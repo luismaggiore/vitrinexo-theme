@@ -4,10 +4,7 @@
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-if ( is_user_logged_in() ) {
-    wp_safe_redirect( home_url( '/dashboard/' ) );
-    exit;
-}
+$vx_is_logged = is_user_logged_in();
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -18,13 +15,21 @@ if ( is_user_logged_in() ) {
 </head>
 <body <?php body_class( 'vx-page-landing' ); ?>>
 
-<?php get_template_part( 'partials/nav' ); ?>
+<?php if ( $vx_is_logged ) : ?>
+  <?php get_template_part( 'partials/nav-logged' ); ?>
+<?php else : ?>
+  <?php get_template_part( 'partials/nav' ); ?>
+<?php endif; ?>
 
 <main>
   <?php echo do_shortcode( '[vx_landing]' ); ?>
 </main>
 
-<?php get_template_part( 'partials/footer' ); ?>
+<?php if ( $vx_is_logged ) : ?>
+  <?php get_template_part( 'partials/footer-logged' ); ?>
+<?php else : ?>
+  <?php get_template_part( 'partials/footer' ); ?>
+<?php endif; ?>
 <?php wp_footer(); ?>
 </body>
 </html>

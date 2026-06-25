@@ -6,12 +6,27 @@ $nombre     = vx_get_current_user_short_name();
 $avatar_url = vx_get_current_user_avatar_url();
 $slug       = (string) get_user_meta( $user_id, 'vx_perfil_slug', true );
 $unread     = class_exists( 'VX_Notification' ) ? VX_Notification::count_unread( $user_id ) : 0;
+
+// Comunidades a las que el usuario pertenece
+$vx_user_nav  = class_exists( 'VX_User' ) ? VX_User::get( $user_id ) : null;
+$mis_comunidades = [];
+if ( $vx_user_nav ) {
+    $coms_map = [
+        'out2b'  => [ 'slug' => 'comunidad-out2b',  'label' => 'Out2B',  'icon' => 'ti-rainbow',       'color' => '#a855f7' ],
+        'woman'  => [ 'slug' => 'comunidad-woman',   'label' => 'Woman',  'icon' => 'ti-gender-female', 'color' => '#ec4899' ],
+        'senior' => [ 'slug' => 'comunidad-senior',  'label' => 'Senior', 'icon' => 'ti-award',         'color' => '#d97706' ],
+    ];
+    foreach ( $coms_map as $id => $data ) {
+        if ( $vx_user_nav->is_in_community( $id ) ) {
+            $mis_comunidades[] = $data;
+        }
+    }
+}
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
   <div class="container-fluid px-4">
-    <a href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>" class="navbar-brand d-flex align-items-center gap-2">
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand d-flex align-items-center gap-2">
       <img width="100" src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo" style="flex-shrink:0">
-      <span class="dashboard-date">by Maggiore</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLogged" aria-controls="navLogged" aria-expanded="false" aria-label="Abrir navegación">
       <span class="navbar-toggler-icon"></span>
@@ -30,28 +45,25 @@ $unread     = class_exists( 'VX_Notification' ) ? VX_Notification::count_unread(
         <li class="nav-item">
           <a class="nav-link<?php echo is_page( 'favoritos' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>">Favoritos</a>
         </li>
+        <?php if ( ! empty( $mis_comunidades ) ) : ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Comunidades</a>
           <ul class="dropdown-menu border-0 shadow-sm p-1">
+            <?php foreach ( $mis_comunidades as $com ) : ?>
             <li>
-              <a class="dropdown-item rounded-2" href="<?php echo esc_url( home_url( '/comunidad-out2b/' ) ); ?>">
-                <i class="ti ti-rainbow me-2" style="color:#a855f7"></i>Out2B
+              <a class="dropdown-item rounded-2" href="<?php echo esc_url( home_url( '/' . $com['slug'] . '/' ) ); ?>">
+                <i class="ti <?php echo esc_attr( $com['icon'] ); ?> me-2" style="color:<?php echo esc_attr( $com['color'] ); ?>"></i><?php echo esc_html( $com['label'] ); ?>
               </a>
             </li>
-            <li>
-              <a class="dropdown-item rounded-2" href="<?php echo esc_url( home_url( '/comunidad-woman/' ) ); ?>">
-                <i class="ti ti-gender-female me-2" style="color:#ec4899"></i>Woman
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item rounded-2" href="<?php echo esc_url( home_url( '/comunidad-senior/' ) ); ?>">
-                <i class="ti ti-award me-2" style="color:#d97706"></i>Senior
-              </a>
-            </li>
+            <?php endforeach; ?>
           </ul>
         </li>
+        <?php endif; ?>
         <li class="nav-item">
           <a class="nav-link<?php echo is_page( '4dinner' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">4Dinner</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link<?php echo is_page( 'publicaciones' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/publicaciones/' ) ); ?>">Feed</a>
         </li>
         <li class="nav-item">
           <a class="nav-link<?php echo is_page( 'blog' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a>
@@ -84,6 +96,8 @@ $unread     = class_exists( 'VX_Notification' ) ? VX_Notification::count_unread(
             <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/conexiones/' ) ); ?>"><i class="ti ti-network"></i>Mis conexiones</a></li>
             <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/matches/' ) ); ?>"><i class="ti ti-sparkles"></i>Mis matches</a></li>
             <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>"><i class="ti ti-heart"></i>Mis favoritos</a></li>
+            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/mis-publicaciones/' ) ); ?>"><i class="ti ti-file-text"></i>Mis publicaciones</a></li>
+            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/mis-eventos/' ) ); ?>"><i class="ti ti-bowl"></i>Mis 4Dinners</a></li>
             <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>"><i class="ti ti-bell"></i>Notificaciones</a></li>
             <li><hr class="dropdown-vx-divider my-1"></li>
             <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/configuracion/' ) ); ?>"><i class="ti ti-settings"></i>Configuración</a></li>

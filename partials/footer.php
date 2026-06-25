@@ -8,7 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
     <div class="footer-vx__top">
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-vx__brand" aria-label="Ir al inicio">
         <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo">
-        <span>by Maggiore</span>
       </a>
       <a href="<?php echo esc_url( home_url( '/login/?tab=registro' ) ); ?>" class="btn-vx btn-primary-vx btn-vx-sm">Únete gratis →</a>
     </div>
@@ -39,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
       </nav>
     </div>
     <div class="footer-vx__bottom">
-      <span>© <?php echo date( 'Y' ); ?> Vitrinexo SpA · RUT 78.392.317-3</span>
+      <span>© <?php echo date( 'Y' ); ?> Vitrinexo SpA</span>
       <span>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/privacidad/' ) ); ?>">Privacidad</a> ·
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/terminos/' ) ); ?>">Términos</a>

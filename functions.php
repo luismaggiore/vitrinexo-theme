@@ -142,6 +142,8 @@ add_filter( 'template_include', function ( string $template ): string {
         'directorio'              => 'page-directorio',
         'busqueda'                => 'page-search-results',
         'matches'                 => 'page-matches',
+        'match-seeks'             => 'page-matches',
+        'match-offers'            => 'page-matches',
         'perfil'                  => 'page-perfil',
         'editar-perfil'           => 'page-editor-perfil',
         'favoritos'               => 'page-favoritos',
@@ -155,6 +157,9 @@ add_filter( 'template_include', function ( string $template ): string {
         'comunidad-senior'        => 'page-comunidad',
         'landing-4dinner'         => 'page-4dinner-public',
         '4dinner'                 => 'page-4dinner',
+        'mis-eventos'             => 'page-mis-eventos',
+        'publicaciones'           => 'page-publicaciones',
+        'mis-publicaciones'       => 'page-mis-publicaciones',
         'blog'                    => 'page-blog',
         'recuperar-contrasena'    => 'page-recuperar-contrasena',
         'nueva-contrasena'        => 'page-nueva-contrasena',
@@ -181,7 +186,7 @@ add_action( 'template_redirect', function () {
         $tpl = get_template_directory() . '/templates/page-404.php';
         if ( file_exists( $tpl ) ) {
             status_header( 404 );
-            include $tpl;
+            require $tpl; // Fix: require en lugar de include para fallar explícitamente
             exit;
         }
     }

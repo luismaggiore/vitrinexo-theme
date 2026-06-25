@@ -247,4 +247,242 @@
     });
   }
 
+  // ── Nueva contraseña (reset) ──────────────────────────────────────────────────
+
+  const nuevaPassForm = document.getElementById('vx-nueva-pass-form');
+  if (nuevaPassForm) {
+    nuevaPassForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const btn  = nuevaPassForm.querySelector('[type="submit"]');
+      const msg  = document.getElementById('vx-nueva-pass-msg');
+      const pass = nuevaPassForm.querySelector('[name="password"]').value;
+      const conf = nuevaPassForm.querySelector('[name="password_confirm"]').value;
+
+      msg.classList.add('d-none');
+      msg.className = 'vx-alert d-none mt-2';
+
+      if (pass.length < 8) {
+        msg.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+        msg.className = 'vx-alert vx-alert--error mt-2';
+        return;
+      }
+      if (pass !== conf) {
+        msg.textContent = 'Las contraseñas no coinciden.';
+        msg.className = 'vx-alert vx-alert--error mt-2';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Guardando…';
+
+      try {
+        const res  = await fetch(vx_data.api_url + 'cuenta/reset-password', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': vx_data.nonce },
+          body:    JSON.stringify({
+            key:      nuevaPassForm.querySelector('[name="key"]').value,
+            login:    nuevaPassForm.querySelector('[name="login"]').value,
+            password: pass,
+          }),
+        });
+        const data = await res.json();
+        if (data.success && data.redirect) {
+          window.location.href = data.redirect;
+        } else {
+          const errMap = {
+            token_invalido:  'El enlace ha expirado. Solicita uno nuevo.',
+            password_corta:  'La contraseña debe tener al menos 8 caracteres.',
+          };
+          msg.textContent = errMap[data.error] || 'Error al guardar. Intenta de nuevo.';
+          msg.className = 'vx-alert vx-alert--error mt-2';
+          btn.disabled = false;
+          btn.textContent = 'Guardar contraseña';
+        }
+      } catch {
+        msg.textContent = 'Error de conexión. Intenta más tarde.';
+        msg.className = 'vx-alert vx-alert--error mt-2';
+        btn.disabled = false;
+        btn.textContent = 'Guardar contraseña';
+      }
+    });
+  }
+
+  // ── Upload con progreso ───────────────────────────────────────────────────────
+  // Función global reutilizable en todas las páginas con subida de imágenes.
+  // Parámetros:
+  //   file       — File object del input
+  //   tipo       — 'foto' | 'logo' | 'banner'
+  //   empresaId  — ID de empresa si aplica (null para foto de usuario)
+  //   progressEl — elemento DOM del contenedor de barra de progreso (puede ser null)
+  //   onSuccess  — callback(json) llamado con la respuesta si success
+  //   onError    — callback(mensajeString) llamado en error o validación fallida
+
+  var VX_MAX_UPLOAD_MB    = 15;
+  var VX_MAX_UPLOAD_BYTES = VX_MAX_UPLOAD_MB * 1024 * 1024;
+
+  window.vxUploadXHR = function vxUploadXHR(file, tipo, empresaId, progressEl, onSuccess, onError) {
+    if (!file) return;
+
+    // ── Validación client-side de tamaño ──────────────────────────────────────
+    if (file.size > VX_MAX_UPLOAD_BYTES) {
+      var sizeMB = (file.size / (1024 * 1024)).toFixed(1);
+      if (onError) onError(
+        'La imagen pesa ' + sizeMB + ' MB y supera el máximo de ' + VX_MAX_UPLOAD_MB + ' MB. '
+        + 'Elige una imagen más pequeña o comprime el archivo antes de subir.'
+      );
+      return;
+    }
+
+    // ── Helpers de barra ──────────────────────────────────────────────────────
+    var fill  = progressEl ? progressEl.querySelector('.vx-progress-fill')  : null;
+    var label = progressEl ? progressEl.querySelector('.vx-progress-label') : null;
+
+    function showProgress(pct, text) {
+      if (!progressEl) return;
+      progressEl.classList.remove('d-none');
+      if (fill)  fill.style.width = pct + '%';
+      if (label) label.textContent = text || ('Subiendo... ' + pct + '%');
+    }
+    function hideProgress() {
+      if (progressEl) progressEl.classList.add('d-none');
+    }
+
+    showProgress(0, 'Preparando...');
+
+    // ── XHR con progreso ─────────────────────────────────────────────────────
+    var fd = new FormData();
+    fd.append('file', file);
+    fd.append('tipo', tipo);
+    if (empresaId) fd.append('contexto', String(empresaId));
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.upload.addEventListener('progress', function(e) {
+      if (e.lengthComputable) {
+        var pct = Math.round((e.loaded / e.total) * 100);
+        showProgress(pct, 'Subiendo... ' + pct + '%');
+      }
+    });
+
+    xhr.upload.addEventListener('load', function() {
+      showProgress(100, 'Procesando...');
+    });
+
+    xhr.addEventListener('load', function() {
+      hideProgress();
+      try {
+        var json = JSON.parse(xhr.responseText);
+        if (json.success) {
+          if (onSuccess) onSuccess(json);
+        } else {
+          var msgs = {
+            archivo_muy_grande: 'La imagen supera el límite de ' + VX_MAX_UPLOAD_MB + ' MB.',
+            formato_invalido:   'Formato no permitido. Usa JPG, PNG o WebP.',
+            tipo_invalido:      'Tipo de upload no válido.',
+          };
+          if (onError) onError(msgs[json.error] || json.error || 'Error al subir la imagen.');
+        }
+      } catch(e) {
+        if (onError) onError('Error inesperado del servidor.');
+      }
+    });
+
+    xhr.addEventListener('error', function() {
+      hideProgress();
+      if (onError) onError('Error de red. Comprueba tu conexión e intenta de nuevo.');
+    });
+
+    xhr.addEventListener('abort', function() {
+      hideProgress();
+    });
+
+    if (!window.vx_data || !window.vx_data.api_url) {
+      if (onError) onError('Error de configuración: vx_data no disponible.');
+      return;
+    }
+
+    xhr.open('POST', vx_data.api_url + 'upload');
+    xhr.setRequestHeader('X-WP-Nonce', vx_data.nonce);
+    xhr.send(fd);
+  };
+
+  // ── Validador de URLs de LinkedIn ────────────────────────────────────────────
+  // Aplica a todos los inputs con clase .vx-linkedin-input en cualquier página.
+
+  // Exponer globalmente para uso en shortcodes inline (onboarding, editor)
+  window.vxIsLinkedinUrl = function vxIsLinkedinUrl(value) {
+    if (!value || value.trim() === '') return true; // vacío = válido (campo opcional)
+    var v = value.trim().toLowerCase();
+    // Normalizar: añadir https:// si no tiene protocolo para el test
+    if (!v.startsWith('http://') && !v.startsWith('https://')) {
+      v = 'https://' + v;
+    }
+    try {
+      var url = new URL(v);
+      var host = url.hostname.replace(/^www\./, '');
+      return host === 'linkedin.com' || host.endsWith('.linkedin.com');
+    } catch (e) {
+      return false; // URL inválida
+    }
+  }
+
+  function vxIsLinkedinUrl(value) { return window.vxIsLinkedinUrl(value); } // alias interno
+
+  function vxLinkedinFeedback(input, valid) {
+    // Borrar feedback anterior
+    var existing = input.parentElement.querySelector('.vx-linkedin-error');
+    if (existing) existing.remove();
+
+    if (!valid) {
+      input.style.borderColor = 'var(--color-pink-500)';
+      var msg = document.createElement('span');
+      msg.className = 'vx-linkedin-error form-hint';
+      msg.style.cssText = 'color:var(--color-pink-600);display:flex;align-items:center;gap:4px;margin-top:4px';
+      msg.innerHTML = '<i class="ti ti-alert-circle" style="font-size:13px"></i> Ingresa una URL de LinkedIn válida (ej: linkedin.com/in/tu-nombre o linkedin.com/company/empresa)';
+      // Insertar después del input o de su contenedor padre inmediato
+      var container = input.closest('.input-group-vx') || input;
+      container.insertAdjacentElement('afterend', msg);
+    } else {
+      // Restablecer color del borde
+      input.style.borderColor = '';
+      // Si el campo tiene un valor válido y no vacío, mostrar un check sutil
+      if (input.value.trim()) {
+        input.style.borderColor = 'var(--color-green-500)';
+      }
+    }
+  }
+
+  // Inicializar validación en todos los campos LinkedIn actuales y futuros
+  function vxInitLinkedinValidation() {
+    document.querySelectorAll('.vx-linkedin-input').forEach(function (input) {
+      if (input.dataset.linkedinValidated) return;
+      input.dataset.linkedinValidated = '1';
+
+      // Validar al perder el foco
+      input.addEventListener('blur', function () {
+        vxLinkedinFeedback(input, vxIsLinkedinUrl(input.value));
+      });
+
+      // Quitar error mientras escribe
+      input.addEventListener('input', function () {
+        var existing = input.parentElement.querySelector('.vx-linkedin-error');
+        if (existing) existing.remove();
+        input.style.borderColor = '';
+      });
+
+      // Validar valor inicial si ya tiene contenido
+      if (input.value.trim()) {
+        vxLinkedinFeedback(input, vxIsLinkedinUrl(input.value));
+      }
+    });
+  }
+
+  vxInitLinkedinValidation();
+
+  // Re-inicializar cuando se muestran nuevos elementos (ej: formulario empresa que se expande)
+  document.addEventListener('click', function (e) {
+    // Pequeño delay para que el DOM se actualice antes de buscar nuevos inputs
+    setTimeout(vxInitLinkedinValidation, 50);
+  });
+
 })();

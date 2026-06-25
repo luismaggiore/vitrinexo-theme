@@ -4,7 +4,6 @@
     <div class="footer-vx__top">
       <a href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>" class="footer-vx__brand" aria-label="Ir al dashboard">
         <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo">
-        <span>by Maggiore</span>
       </a>
       <a href="<?php echo esc_url( home_url( '/editar-perfil/' ) ); ?>" class="btn-vx btn-soft-primary btn-vx-sm">
         <i class="ti ti-pencil"></i> Editar perfil
@@ -42,7 +41,7 @@
       </nav>
     </div>
     <div class="footer-vx__bottom">
-      <span>© <?php echo date( 'Y' ); ?> Vitrinexo by Maggiore</span>
+      <span>© <?php echo date( 'Y' ); ?> Vitrinexo SpA</span>
       <span>Vitrinea, conecta y colabora.</span>
     </div>
   </div>
