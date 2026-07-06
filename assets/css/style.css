@@ -2083,6 +2083,13 @@ select.form-control-vx {
   margin: 0;
 }
 
+/* ── Sección problema — grid auto-adaptable ── */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
 /* ── Para quién es — audience block ── */
 .audience-block {
   background: var(--color-surface);
