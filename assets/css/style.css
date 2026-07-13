@@ -1951,10 +1951,7 @@ select.form-control-vx {
   .multiverse-grid {
     grid-template-columns: 1fr;
   }
-  .multiverse-grid > .multiverse-card:first-child {
-    grid-row: auto;
-    min-height: 240px;
-  }
+  .multiverse-card--main,
   .multiverse-card--dinner {
     grid-column: auto;
   }
@@ -2137,14 +2134,14 @@ select.form-control-vx {
 /* ── Multiverso grid ── */
 .multiverse-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 1rem;
   row-gap: 2rem;
 }
 
-.multiverse-grid > .multiverse-card:first-child {
-  grid-row: span 2;
+.multiverse-card--main,
+.multiverse-card--dinner {
+  grid-column: 1 / -1;
 }
 
 .multiverse-card {
