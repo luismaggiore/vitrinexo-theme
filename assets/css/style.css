@@ -2130,8 +2130,7 @@ select.form-control-vx {
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  min-height: 180px;
+  justify-content: flex-start;
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -2151,7 +2150,6 @@ select.form-control-vx {
   --mv-label: #00aeb8;
   --mv-title: #156467;
   --mv-desc:  #1b8186;
-  min-height: 360px;
 }
 
 /* Comunidades y 4Dinner — paleta pastel plana */
