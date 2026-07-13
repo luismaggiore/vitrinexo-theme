@@ -1735,7 +1735,7 @@ select.form-control-vx {
   overflow: hidden;
   display: grid;
   place-items: center;
-  padding: 2rem;
+  padding: 2rem 0;
 }
 
 #networkCanvas {
@@ -1762,7 +1762,9 @@ select.form-control-vx {
   position: relative;
   z-index: 3;
   max-width: 780px;
+  margin: 0 auto;
   text-align: center;
+  width: 100%;
 }
 .hero-content::before {
   content: "";
