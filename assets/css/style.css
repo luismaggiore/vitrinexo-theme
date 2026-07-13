@@ -1948,11 +1948,6 @@ select.form-control-vx {
   .multiverse-card--dinner {
     grid-column: auto;
   }
-  .founder-block {
-    grid-template-columns: 1fr;
-    padding: 2rem 1.5rem;
-    gap: 2rem;
-  }
 }
 
 /* ── Concept cards (Vitrina / Nexo) ── */
@@ -2225,7 +2220,7 @@ select.form-control-vx {
   margin: 0;
 }
 
-/* ── Afiliado Original ── */
+/* ── Miembro Original ── */
 .founder-block {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -2236,6 +2231,18 @@ select.form-control-vx {
   gap: 3rem;
   align-items: start;
   box-shadow: var(--shadow-sm);
+}
+
+.founder-block > * {
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .founder-block {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 2.5rem 2rem;
+  }
 }
 
 .founder-benefits {
