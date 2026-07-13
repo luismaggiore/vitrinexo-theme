@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
     </div>
     <div class="footer-vx__grid">
       <div>
-        <p class="footer-vx__text">Directorio B2B hispanohablante de empresarios verificados. Conecta, colabora y crece.</p>
+        <p class="footer-vx__text">Directorio B2B de empresarios verificados. Conecta, colabora y crece.</p>
         <a class="footer-vx__contact" href="mailto:hola@vitrinexo.com">
           <i class="ti ti-mail"></i> hola@vitrinexo.com
         </a>
