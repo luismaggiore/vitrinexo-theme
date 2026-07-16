@@ -1277,6 +1277,8 @@ select.form-control-vx {
    NAV
    ============================================================ */
 .navbar-vx {
+  position: relative;
+  z-index: 100;
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   padding: 0.85rem 1.5rem;
@@ -1480,6 +1482,8 @@ select.form-control-vx {
    FOOTER
    ============================================================ */
 .footer-vx {
+  position: relative;
+  z-index: 100;
   flex-shrink: 0;
   background: #fff;
   border-top: 1px solid var(--color-border);
@@ -1731,11 +1735,13 @@ select.form-control-vx {
 
 .network-hero {
   position: relative;
+  z-index: 1;
   min-height: 100vh;
   overflow: hidden;
   display: grid;
   place-items: center;
   padding: 2rem 0;
+  background: transparent;
 }
 
 #networkCanvas,
@@ -1745,40 +1751,6 @@ select.form-control-vx {
   width: 100%;
   height: 100%;
   z-index: 1;
-}
-
-.network-section {
-  position: relative;
-  overflow: hidden;
-}
-
-.network-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: rgba(250, 252, 255, 0.45);
-  pointer-events: none;
-}
-
-.network-section > .container {
-  position: relative;
-  z-index: 3;
-}
-
-.network-section .section-landing-head {
-  position: relative;
-}
-
-.network-section .section-landing-head::before {
-  content: "";
-  position: absolute;
-  inset: -2rem -3rem;
-  background: var(--color-surface);
-  border-radius: 1000px;
-  filter: blur(32px);
-  z-index: -1;
-  opacity: 0.92;
 }
 
 .network-hero::after {
