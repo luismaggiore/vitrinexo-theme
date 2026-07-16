@@ -1792,10 +1792,10 @@ select.form-control-vx {
   position: absolute;
   inset: 0;
   z-index: -1;
-  transform: scale(1.4);
-  background: var(--color-ice-200);
+  transform: scale(1.6);
+  background: rgba(250, 252, 255, 0.55);
   border-radius: 1000px;
-  filter: blur(100px);
+  filter: blur(40px);
   pointer-events: none;
 }
 .eyebrow {
@@ -1897,6 +1897,18 @@ select.form-control-vx {
   text-align: center;
   max-width: 700px;
   margin: 0 auto 2.5rem;
+  position: relative;
+}
+
+.section-landing-head::before {
+  content: "";
+  position: absolute;
+  inset: -1.5rem -2rem;
+  z-index: -1;
+  background: rgba(250, 252, 255, 0.55);
+  border-radius: 1000px;
+  filter: blur(40px);
+  pointer-events: none;
 }
 
 /* Secciones con solo head (sin grid debajo) — menos aire */
