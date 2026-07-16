@@ -1752,6 +1752,15 @@ select.form-control-vx {
   overflow: hidden;
 }
 
+.network-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(250, 252, 255, 0.88);
+  pointer-events: none;
+}
+
 .network-section > .container {
   position: relative;
   z-index: 2;
