@@ -1756,14 +1756,14 @@ select.form-control-vx {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   background: rgba(250, 252, 255, 0.88);
   pointer-events: none;
 }
 
 .network-section > .container {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .network-hero::after {
