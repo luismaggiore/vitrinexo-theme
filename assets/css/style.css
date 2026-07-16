@@ -119,8 +119,7 @@
 
 body {
   font-family: var(--font-body);
-  background: var(--color-background);
-  background-attachment: fixed;
+  background: transparent;
   color: var(--color-text-primary);
   font-size: 16px;
   line-height: 1.6;
