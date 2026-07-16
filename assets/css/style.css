@@ -1737,7 +1737,6 @@ select.form-control-vx {
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  overflow: hidden;
   display: grid;
   place-items: center;
   padding: 2rem 0;
@@ -1759,8 +1758,8 @@ select.form-control-vx {
   inset: 0;
   z-index: 2;
   background: linear-gradient(
-    rgba(255, 255, 255, 0.2),
-    var(--color-background)
+    rgba(255, 255, 255, 0.1),
+    rgba(243, 249, 253, 0.3)
   );
   pointer-events: none;
 }
