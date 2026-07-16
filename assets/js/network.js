@@ -182,4 +182,8 @@ class NetworkCanvas {
   }
 }
 
-document.querySelectorAll(".network-canvas").forEach(canvas => new NetworkCanvas(canvas));
+// Inyectar el canvas de fondo directamente en el body
+const pageCanvas = document.createElement("canvas");
+pageCanvas.id = "networkPageCanvas";
+document.body.prepend(pageCanvas);
+new NetworkCanvas(pageCanvas);
