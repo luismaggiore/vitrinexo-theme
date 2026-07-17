@@ -486,3 +486,22 @@
   });
 
 })();
+
+/* ── Nav drawer: cerrar primero, navegar después ── */
+document.addEventListener('DOMContentLoaded', () => {
+  const drawer = document.getElementById('vxDrawer');
+  if (!drawer) return;
+
+  drawer.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = link.getAttribute('href');
+      const offcanvas = bootstrap.Offcanvas.getInstance(drawer) || new bootstrap.Offcanvas(drawer);
+      offcanvas.hide();
+      drawer.addEventListener('hidden.bs.offcanvas', () => {
+        const el = document.querySelector(target);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, { once: true });
+    });
+  });
+});
