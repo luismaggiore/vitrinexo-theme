@@ -25,10 +25,10 @@
     <a href="#como-funciona"    data-bs-dismiss="offcanvas">Cómo funciona</a>
     <a href="#para-quien"       data-bs-dismiss="offcanvas">Para quién es</a>
     <a href="#el-multiverso"    data-bs-dismiss="offcanvas">El multiverso</a>
-    <a href="#4dinner"          data-bs-dismiss="offcanvas">Experiencia presencial</a>
+    <a href="#cuatro-dinner"      data-bs-dismiss="offcanvas">Experiencia presencial</a>
   </nav>
   <div class="vx-drawer__actions">
-    <a href="<?php echo esc_url( home_url( '/login/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm w-100 justify-content-center mb-2">Ingresar</a>
-    <a href="#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm w-100 justify-content-center" data-bs-dismiss="offcanvas">Inscríbete →</a>
+    <a href="#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm w-100 justify-content-center mb-2" data-bs-dismiss="offcanvas">Inscríbete →</a>
+    <a href="<?php echo esc_url( home_url( '/login/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm w-100 justify-content-center">Ingresar</a>
   </div>
 </div>
