@@ -1793,9 +1793,9 @@ select.form-control-vx {
   inset: 0;
   z-index: -1;
   transform: scale(1.6);
-  background: rgba(250, 252, 255, 0.55);
+  background: rgba(250, 252, 255, 0.75);
   border-radius: 1000px;
-  filter: blur(40px);
+  filter: blur(60px);
   pointer-events: none;
 }
 .eyebrow {
@@ -1905,9 +1905,9 @@ select.form-control-vx {
   position: absolute;
   inset: -1.5rem -2rem;
   z-index: -1;
-  background: rgba(250, 252, 255, 0.55);
+  background: rgba(250, 252, 255, 0.75);
   border-radius: 1000px;
-  filter: blur(40px);
+  filter: blur(60px);
   pointer-events: none;
 }
 
