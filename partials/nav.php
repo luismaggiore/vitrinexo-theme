@@ -9,19 +9,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navPublic">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4 gap-1">
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">Qué es</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo esc_url( home_url( '/landing-4dinner/' ) ); ?>">4Dinner</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="#el-problema">El problema</a></li>
+        <li class="nav-item"><a class="nav-link" href="#como-funciona">Cómo funciona</a></li>
+        <li class="nav-item"><a class="nav-link" href="#para-quien">Para quién es</a></li>
+        <li class="nav-item"><a class="nav-link" href="#el-multiverso">El multiverso</a></li>
+        <li class="nav-item"><a class="nav-link" href="#4dinner">Experiencia presencial</a></li>
       </ul>
       <div class="d-flex align-items-center gap-2">
         <a href="<?php echo esc_url( home_url( '/login/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm">Ingresar</a>
-        <a href="<?php echo esc_url( home_url( '/login/?tab=registro' ) ); ?>" class="btn-vx btn-primary-vx btn-vx-sm">Registrarse →</a>
+        <a href="#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm">Inscríbete →</a>
       </div>
     </div>
   </div>

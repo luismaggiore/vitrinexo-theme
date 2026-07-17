@@ -434,7 +434,7 @@ h2 strong {
 }
 
 .badge-founder {
-  background: var(--color-green-500);
+  background: var(--color-primary);
   color: #fff;
 }
 
@@ -1799,6 +1799,13 @@ select.form-control-vx {
   filter: blur(60px);
   pointer-events: none;
 }
+
+/* Vitrinexo brand name en texto — siempre teal y negrita */
+.vx-name {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
 .eyebrow {
   display: inline-block;
   margin-bottom: 1rem;
@@ -2165,6 +2172,7 @@ select.form-control-vx {
   border-color: var(--color-primary);
   background: var(--color-primary-soft);
   color: var(--color-primary-active);
+  cursor: pointer;
 }
 
 /* ── Multiverso grid ── */
