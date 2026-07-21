@@ -1871,6 +1871,14 @@ body { padding-top: 60px; }
   z-index: 1;
 }
 
+.hero-feature-img {
+  display: block;
+  max-width: 780px;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0, 174, 184, 0.12), 0 4px 16px rgba(0,0,0,0.08);
+}
+
 .network-hero::after {
   content: "";
   position: absolute;
