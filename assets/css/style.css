@@ -1859,6 +1859,7 @@ body { padding-top: 60px; }
   height: 100vh;
   z-index: 0;
   pointer-events: none;
+  opacity: 0.5;
 }
 
 #networkCanvas,
