@@ -12,20 +12,22 @@ $content = get_the_content();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php wp_head(); ?>
 </head>
-<body <?php body_class( 'vx-page-interior' ); ?>>
+<body <?php body_class( 'vx-page-legal' ); ?>>
 
 <?php get_template_part( 'partials/nav' ); ?>
 
-<main>
-  <div class="container py-5" style="max-width:820px">
-    <div class="card-vx">
-      <h1 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--color-text-primary);margin-bottom:1.5rem">
-        <?php echo esc_html( $title ); ?>
-      </h1>
-      <div class="article-body" style="color:var(--color-text-secondary);line-height:1.8">
-        <?php echo apply_filters( 'the_content', $content ); ?>
-      </div>
+<main class="vx-legal-main">
+  <div class="vx-legal-container">
+
+    <header class="vx-legal-header">
+      <p class="vx-legal-eyebrow">Vitrinexo</p>
+      <h1 class="vx-legal-title"><?php echo esc_html( $title ); ?></h1>
+    </header>
+
+    <div class="vx-legal-body">
+      <?php echo apply_filters( 'the_content', $content ); ?>
     </div>
+
   </div>
 </main>
 
