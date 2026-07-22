@@ -75,7 +75,7 @@ add_action( 'wp_enqueue_scripts', function () {
         wp_enqueue_script( 'vitrinexo-editor', $uri . '/assets/js/editor-perfil.js', [ 'vitrinexo-main' ], $ver, true );
     }
 
-    if ( is_front_page() ) {
+    if ( is_front_page() || is_page( [ 'privacidad', 'terminos' ] ) ) {
         wp_enqueue_script( 'vitrinexo-network', $uri . '/assets/js/network.js', [], $ver, true );
     }
 } );

@@ -12,7 +12,7 @@ $content = get_the_content();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php wp_head(); ?>
   <style>
-    .vx-legal-main { background: #fff; min-height: 100vh; }
+    .vx-legal-main { background: transparent; min-height: 100vh; position: relative; z-index: 1; }
     .vx-legal-wrap { max-width: 760px; margin: 0 auto; padding: 4rem 2rem 6rem; }
     .vx-legal-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #00aeb8; margin: 0 0 .75rem; }
     .vx-legal-title { font-family: "Switzer", -apple-system, sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -.04em; color: #1a2335; line-height: 1.15; margin: 0 0 2.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid #00aeb8; }
