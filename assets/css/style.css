@@ -2158,7 +2158,12 @@ body { padding-top: 60px; }
     padding: 2rem 1.25rem;
   }
   .multiverse-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    display: grid !important;
+  }
+  .multiverse-grid > * {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
   }
   .multiverse-card--main,
   .multiverse-card--dinner {
