@@ -1302,26 +1302,39 @@ select.form-control-vx {
 
 /* Botón hamburguesa */
 .vx-topbar__toggle {
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
   flex-direction: column;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
   gap: 5px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 8px;
   border-radius: var(--radius-sm);
   transition: background 0.15s;
+  -webkit-appearance: none;
+  appearance: none;
+  visibility: visible;
+  opacity: 1;
 }
 .vx-topbar__toggle:hover { background: var(--color-ice-300); }
 .vx-topbar__toggle span {
   display: block;
+  width: 22px;
   height: 2px;
   background: var(--color-text-primary);
   border-radius: 2px;
   transition: all 0.2s;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 /* Offset de la topbar en el contenido */
