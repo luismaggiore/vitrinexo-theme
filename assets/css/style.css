@@ -1961,6 +1961,11 @@ body { padding-top: 60px; }
   font-weight: 600;
 }
 
+.vx-name-regular {
+  color: var(--color-primary);
+  font-weight: 400;
+}
+
 .eyebrow {
   display: inline-block;
   margin-bottom: 1rem;
