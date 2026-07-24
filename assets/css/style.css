@@ -5594,6 +5594,8 @@ a.pub-comment-author:hover {
     border-radius: 12px;
     overflow: hidden;
     padding: 0;
+    min-height: 0;
+    background: #fff;
   }
   .vx-context-banner__content {
     padding: 1.5rem 1.5rem;
@@ -5601,13 +5603,15 @@ a.pub-comment-author:hover {
   }
   .vx-context-banner__img {
     order: 1;
+    width: 100%;
     height: auto;
+    min-height: 0;
     max-height: none;
     object-fit: contain;
     object-position: center;
     border-radius: 12px 12px 0 0;
     display: block;
-    margin-top: 0;
+    margin: 0;
   }
 }
 
