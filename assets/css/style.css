@@ -5526,3 +5526,76 @@ a.pub-comment-author:hover {
 .vx-legal-body a:hover {
   opacity: 0.75;
 }
+
+
+/* ════════════════════════════════════════
+   Banner "Vitrinexo cambia el contexto"
+   ════════════════════════════════════════ */
+.vx-context-banner {
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+}
+
+.vx-context-banner__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Degradado oscuro en la izquierda para que el texto sea legible */
+.vx-context-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+}
+
+.vx-context-banner__content {
+  position: relative;
+  z-index: 2;
+  padding: 3rem 3.5rem;
+  max-width: 520px;
+}
+
+.vx-context-banner__title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.vx-context-banner__desc {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+@media (max-width: 640px) {
+  .vx-context-banner {
+    min-height: 260px;
+    border-radius: 12px;
+  }
+  .vx-context-banner__content {
+    padding: 2rem 1.5rem;
+  }
+  .vx-context-banner__title {
+    font-size: 1.35rem;
+  }
+}
