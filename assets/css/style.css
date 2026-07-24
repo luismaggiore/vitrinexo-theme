@@ -5637,8 +5637,9 @@ a.pub-comment-author:hover {
 }
 @media (max-width: 768px) {
   .vx-img-banner img {
-    height: 240px;
-    object-position: center 15%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
   }
 }
 
