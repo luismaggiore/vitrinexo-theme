@@ -5619,3 +5619,77 @@ a.pub-comment-author:hover {
   height: auto;
   display: block;
 }
+
+
+/* ════════════════════════════════════════
+   Banner nocturno 4Dinner
+   ════════════════════════════════════════ */
+.vx-nocturna-banner {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
+.vx-nocturna-banner__img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.vx-nocturna-banner:hover .vx-nocturna-banner__img {
+  transform: scale(1.03);
+}
+
+.vx-nocturna-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5rem 3rem;
+}
+
+.vx-nocturna-banner__label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.vx-nocturna-banner__text {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .vx-nocturna-banner__img {
+    height: 280px;
+    object-position: center 20%;
+  }
+  .vx-nocturna-banner__overlay {
+    padding: 1.75rem 1.5rem;
+  }
+  .vx-nocturna-banner__text {
+    font-size: 1.3rem;
+  }
+}
