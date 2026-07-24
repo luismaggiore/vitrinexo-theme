@@ -5683,8 +5683,9 @@ a.pub-comment-author:hover {
 
 @media (max-width: 768px) {
   .vx-nocturna-banner__img {
-    height: 280px;
-    object-position: center 15%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
   }
 }
 
