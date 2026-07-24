@@ -1325,6 +1325,46 @@ select.form-control-vx {
   visibility: visible;
   opacity: 1;
 }
+
+/* Nav desktop */
+.vx-topbar__nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
+  justify-content: center;
+}
+.vx-topbar__nav-desktop a {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.vx-topbar__nav-desktop a:hover {
+  color: var(--color-text-primary);
+  background: var(--color-ice-200);
+}
+.vx-topbar__actions-desktop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* En mobile: ocultar nav y acciones desktop, mostrar hamburguesa */
+@media (max-width: 900px) {
+  .vx-topbar__nav-desktop,
+  .vx-topbar__actions-desktop { display: none; }
+}
+
+/* En desktop: ocultar hamburguesa */
+@media (min-width: 901px) {
+  .vx-topbar__toggle { display: none; }
+}
 .vx-topbar__toggle:hover { background: var(--color-ice-300); }
 .vx-topbar__toggle span {
   display: block;
