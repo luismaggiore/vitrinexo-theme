@@ -5687,3 +5687,19 @@ a.pub-comment-author:hover {
     object-position: center 15%;
   }
 }
+
+
+/* ── Saltos de línea exclusivos para mobile ── */
+.vx-br-mobile { display: none; }
+
+@media (max-width: 768px) {
+  .vx-br-mobile { display: inline; }
+
+  /* Centrar títulos y leads en sección Cómo funciona y 4Dinner */
+  #como-funciona .section-landing-title,
+  #como-funciona .section-landing-lead,
+  #for-dinner .section-landing-title,
+  #for-dinner .section-landing-lead {
+    text-align: center;
+  }
+}
