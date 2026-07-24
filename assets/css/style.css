@@ -5703,6 +5703,14 @@ a.pub-comment-author:hover {
 .vx-br-mobile { display: none; }
 
 @media (max-width: 768px) {
+  /* Fix: centrar página y evitar desbordamiento horizontal en iPhone */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  * {
+    max-width: 100%;
+  }
   .vx-br-mobile { display: inline; }
 
   /* Centrar títulos y leads en sección Cómo funciona y 4Dinner */
