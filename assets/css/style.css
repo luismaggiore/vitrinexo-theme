@@ -5599,7 +5599,9 @@ a.pub-comment-author:hover {
   }
   .vx-context-banner__img {
     order: 1;
-    height: 260px;
-    object-position: 30% center;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    object-position: center;
   }
 }
