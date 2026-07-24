@@ -5605,3 +5605,17 @@ a.pub-comment-author:hover {
     object-position: center;
   }
 }
+
+
+/* ── Imagen banner entre secciones ── */
+.vx-img-banner {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+.vx-img-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
