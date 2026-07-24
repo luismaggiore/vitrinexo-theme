@@ -5628,14 +5628,15 @@ a.pub-comment-author:hover {
   position: relative;
   width: 100%;
   overflow: hidden;
-  line-height: 0;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
 }
 
 .vx-nocturna-banner__img {
   width: 100%;
   height: 420px;
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center 20%;
   display: block;
   transition: transform 0.6s ease;
 }
@@ -5660,5 +5661,6 @@ a.pub-comment-author:hover {
 @media (max-width: 768px) {
   .vx-nocturna-banner__img {
     height: 280px;
+    object-position: center 15%;
   }
 }
