@@ -5609,6 +5609,7 @@ a.pub-comment-author:hover {
 
 /* ── Imagen banner entre secciones ── */
 .vx-img-banner {
+  position: relative;
   width: 100%;
   border-radius: 16px;
   overflow: hidden;
@@ -5616,8 +5617,29 @@ a.pub-comment-author:hover {
 }
 .vx-img-banner img {
   width: 100%;
-  height: auto;
+  height: 360px;
+  object-fit: cover;
+  object-position: center 18%;
   display: block;
+  transition: transform 0.6s ease;
+}
+.vx-img-banner:hover img {
+  transform: scale(1.03);
+}
+.vx-img-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(255,255,255,0.18) 0%, transparent 12%, transparent 88%, rgba(255,255,255,0.18) 100%),
+    linear-gradient(to top, rgba(255,255,255,0.12) 0%, transparent 20%);
+  pointer-events: none;
+}
+@media (max-width: 768px) {
+  .vx-img-banner img {
+    height: 240px;
+    object-position: center 15%;
+  }
 }
 
 
