@@ -113,7 +113,7 @@ add_filter( 'show_admin_bar', function ( bool $show ): bool {
 // ─── Título de página para páginas de cuenta ──────────────────────────────────
 
 add_filter( 'document_title_parts', function ( array $title ): array {
-    if ( is_page( 'dashboard' ) ) $title['title'] = 'Dashboard — Vitrinexo';
+    if ( is_page( 'dashboard' ) ) $title['title'] = 'Dashboard | Vitrinexo';
     return $title;
 } );
 
