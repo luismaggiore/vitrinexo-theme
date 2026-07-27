@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 <head>
   <meta charset="<?php bloginfo( 'charset' ); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>404 — Página no encontrada | Vitrinexo</title>
+  <title>404 · Página no encontrada | Vitrinexo</title>
   <?php wp_head(); ?>
 </head>
 <body <?php body_class( 'vx-page-404' ); ?>>

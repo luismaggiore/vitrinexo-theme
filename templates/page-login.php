@@ -77,7 +77,7 @@ if ( is_user_logged_in() ) {
           errDiv.classList.remove('d-none');
           // Si está bloqueado, deshabilitar el botón permanentemente hasta recargar
           if (json.data?.locked) {
-            btn.textContent = 'Acceso bloqueado — espera unos minutos';
+            btn.textContent = 'Acceso bloqueado, espera unos minutos';
             // No re-enable button
           } else {
             btn.disabled = false;
