@@ -6,9 +6,10 @@ $nombre     = vx_get_current_user_short_name();
 $avatar_url = vx_get_current_user_avatar_url();
 $slug       = (string) get_user_meta( $user_id, 'vx_perfil_slug', true );
 $unread     = class_exists( 'VX_Notification' ) ? VX_Notification::count_unread( $user_id ) : 0;
+$perfil_url = $slug ? home_url( '/perfil/' . $slug . '/' ) : home_url( '/editar-perfil/' );
 
 // Comunidades a las que el usuario pertenece
-$vx_user_nav  = class_exists( 'VX_User' ) ? VX_User::get( $user_id ) : null;
+$vx_user_nav     = class_exists( 'VX_User' ) ? VX_User::get( $user_id ) : null;
 $mis_comunidades = [];
 if ( $vx_user_nav ) {
     $coms_map = [
@@ -22,91 +23,93 @@ if ( $vx_user_nav ) {
         }
     }
 }
+$comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' ) || is_page( 'comunidad-senior' );
 ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-  <div class="container-fluid px-4">
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand d-flex align-items-center gap-2">
-      <img width="100" src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo" style="flex-shrink:0">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLogged" aria-controls="navLogged" aria-expanded="false" aria-label="Abrir navegación">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navLogged">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4 gap-1">
-        <li class="nav-item">
-          <a class="nav-link<?php echo is_page( 'directorio' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/directorio/' ) ); ?>">Directorio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link<?php echo is_page( 'matches' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/matches/' ) ); ?>">Matches</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link<?php echo is_page( 'conexiones' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/conexiones/' ) ); ?>">Conexiones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link<?php echo is_page( 'favoritos' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>">Favoritos</a>
-        </li>
-        <?php if ( ! empty( $mis_comunidades ) ) : ?>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Comunidades</a>
-          <ul class="dropdown-menu border-0 shadow-sm p-1">
-            <?php foreach ( $mis_comunidades as $com ) : ?>
-            <li>
-              <a class="dropdown-item rounded-2" href="<?php echo esc_url( home_url( '/' . $com['slug'] . '/' ) ); ?>">
-                <i class="ti <?php echo esc_attr( $com['icon'] ); ?> me-2" style="color:<?php echo esc_attr( $com['color'] ); ?>"></i><?php echo esc_html( $com['label'] ); ?>
-              </a>
-            </li>
-            <?php endforeach; ?>
-          </ul>
-        </li>
-        <?php endif; ?>
-        <li class="nav-item">
-          <a class="nav-link<?php echo is_page( '4dinner' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">4Dinner</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link<?php echo is_page( 'publicaciones' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/publicaciones/' ) ); ?>">Feed</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link<?php echo is_page( 'blog' ) ? ' active' : ''; ?>" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a>
-        </li>
+
+<!-- Barra fija superior (mismo formato que la landing) -->
+<header class="vx-topbar">
+  <a href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>" class="vx-topbar__logo">
+    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo" height="26">
+  </a>
+
+  <!-- Navegación desktop -->
+  <nav class="vx-topbar__nav-desktop">
+    <a href="<?php echo esc_url( home_url( '/directorio/' ) ); ?>"<?php echo is_page( 'directorio' ) ? ' class="active"' : ''; ?>>Directorio</a>
+    <a href="<?php echo esc_url( home_url( '/matches/' ) ); ?>"<?php echo is_page( 'matches' ) ? ' class="active"' : ''; ?>>Matches</a>
+    <a href="<?php echo esc_url( home_url( '/conexiones/' ) ); ?>"<?php echo is_page( 'conexiones' ) ? ' class="active"' : ''; ?>>Conexiones</a>
+    <a href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>"<?php echo is_page( 'favoritos' ) ? ' class="active"' : ''; ?>>Favoritos</a>
+    <?php if ( ! empty( $mis_comunidades ) ) : ?>
+    <div class="dropdown">
+      <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"<?php echo $comunidad_activa ? ' class="active"' : ''; ?>>Comunidades <i class="ti ti-chevron-down" style="font-size:.72em;vertical-align:middle"></i></a>
+      <ul class="dropdown-menu dropdown-vx border-0 shadow" style="padding:6px 0;min-width:180px">
+        <?php foreach ( $mis_comunidades as $com ) : ?>
+        <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/' . $com['slug'] . '/' ) ); ?>"><i class="ti <?php echo esc_attr( $com['icon'] ); ?>" style="color:<?php echo esc_attr( $com['color'] ); ?>"></i><?php echo esc_html( $com['label'] ); ?></a></li>
+        <?php endforeach; ?>
       </ul>
-      <div class="d-flex align-items-center gap-2">
-        <!-- Notificaciones -->
-        <a href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm btn-vx-icon-sm position-relative" aria-label="Notificaciones">
-          <i class="ti ti-bell"></i>
-          <?php if ( $unread > 0 ) : ?>
-            <span class="notif-dot" id="vx-notif-badge" data-count="<?php echo (int) $unread; ?>"></span>
-          <?php else : ?>
-            <span class="notif-dot d-none" id="vx-notif-badge" data-count="0"></span>
-          <?php endif; ?>
-        </a>
-        <!-- Avatar dropdown -->
-        <div class="dropdown">
-          <button class="btn-vx btn-ghost-vx btn-vx-sm d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $nombre ); ?>" class="nav-avatar">
-            <span class="nav-username"><?php echo esc_html( $nombre ); ?></span>
-            <i class="ti ti-chevron-down nav-chevron"></i>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end dropdown-vx border-0 shadow" style="padding:6px 0;min-width:190px">
-            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>"><i class="ti ti-layout-dashboard"></i>Dashboard</a></li>
-            <?php if ( $slug ) : ?>
-              <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/perfil/' . $slug . '/' ) ); ?>"><i class="ti ti-user"></i>Mi perfil</a></li>
-            <?php endif; ?>
-            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/editar-perfil/' ) ); ?>"><i class="ti ti-pencil"></i>Editar perfil</a></li>
-            <li><hr class="dropdown-vx-divider my-1"></li>
-            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/conexiones/' ) ); ?>"><i class="ti ti-network"></i>Mis conexiones</a></li>
-            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/matches/' ) ); ?>"><i class="ti ti-sparkles"></i>Mis matches</a></li>
-            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>"><i class="ti ti-heart"></i>Mis favoritos</a></li>
-            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/mis-publicaciones/' ) ); ?>"><i class="ti ti-file-text"></i>Mis publicaciones</a></li>
-            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/mis-eventos/' ) ); ?>"><i class="ti ti-bowl"></i>Mis 4Dinners</a></li>
-            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>"><i class="ti ti-bell"></i>Notificaciones</a></li>
-            <li><hr class="dropdown-vx-divider my-1"></li>
-            <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/configuracion/' ) ); ?>"><i class="ti ti-settings"></i>Configuración</a></li>
-            <li>
-              <a class="dropdown-vx-item danger" href="<?php echo esc_url( wp_logout_url( home_url( '/login/' ) ) ); ?>"><i class="ti ti-logout"></i>Cerrar sesión</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+    </div>
+    <?php endif; ?>
+    <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>"<?php echo is_page( '4dinner' ) ? ' class="active"' : ''; ?>>4Dinner</a>
+    <a href="<?php echo esc_url( home_url( '/publicaciones/' ) ); ?>"<?php echo is_page( 'publicaciones' ) ? ' class="active"' : ''; ?>>Feed</a>
+    <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"<?php echo is_page( 'blog' ) ? ' class="active"' : ''; ?>>Blog</a>
+  </nav>
+
+  <!-- Acciones desktop: notificaciones + menú de cuenta -->
+  <div class="vx-topbar__actions-desktop">
+    <a href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm btn-vx-icon-sm position-relative" aria-label="Notificaciones">
+      <i class="ti ti-bell"></i>
+      <span class="notif-dot<?php echo $unread > 0 ? '' : ' d-none'; ?>" id="vx-notif-badge" data-count="<?php echo (int) $unread; ?>"></span>
+    </a>
+    <div class="dropdown">
+      <button class="btn-vx btn-ghost-vx btn-vx-sm d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $nombre ); ?>" class="nav-avatar">
+        <span class="nav-username"><?php echo esc_html( $nombre ); ?></span>
+        <i class="ti ti-chevron-down nav-chevron"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-vx border-0 shadow" style="padding:6px 0;min-width:200px">
+        <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>"><i class="ti ti-layout-dashboard"></i>Dashboard</a></li>
+        <li><a class="dropdown-vx-item" href="<?php echo esc_url( $perfil_url ); ?>"><i class="ti ti-user"></i>Perfil</a></li>
+        <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/editar-perfil/' ) ); ?>"><i class="ti ti-pencil"></i>Editar perfil</a></li>
+        <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>"><i class="ti ti-bell"></i>Notificaciones</a></li>
+        <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/configuracion/' ) ); ?>"><i class="ti ti-settings"></i>Configuración</a></li>
+        <li><hr class="dropdown-vx-divider my-1"></li>
+        <li><a class="dropdown-vx-item danger" href="<?php echo esc_url( wp_logout_url( home_url( '/login/' ) ) ); ?>"><i class="ti ti-logout"></i>Cerrar sesión</a></li>
+      </ul>
     </div>
   </div>
-</nav>
+
+  <!-- Hamburguesa solo en mobile -->
+  <button class="vx-topbar__toggle" data-bs-toggle="offcanvas" data-bs-target="#vxDrawer" aria-controls="vxDrawer" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Drawer lateral (solo mobile) -->
+<div class="offcanvas offcanvas-end vx-drawer" tabindex="-1" id="vxDrawer" aria-labelledby="vxDrawerLabel">
+  <div class="vx-drawer__header">
+    <a href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>">
+      <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo" height="24">
+    </a>
+    <button type="button" class="vx-drawer__close" data-bs-dismiss="offcanvas" aria-label="Cerrar">
+      <i class="ti ti-x"></i>
+    </button>
+  </div>
+  <nav class="vx-drawer__nav">
+    <a href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>"     data-bs-dismiss="offcanvas">Dashboard</a>
+    <a href="<?php echo esc_url( home_url( '/directorio/' ) ); ?>"    data-bs-dismiss="offcanvas">Directorio</a>
+    <a href="<?php echo esc_url( home_url( '/matches/' ) ); ?>"       data-bs-dismiss="offcanvas">Matches</a>
+    <a href="<?php echo esc_url( home_url( '/conexiones/' ) ); ?>"    data-bs-dismiss="offcanvas">Conexiones</a>
+    <a href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>"     data-bs-dismiss="offcanvas">Favoritos</a>
+    <?php foreach ( $mis_comunidades as $com ) : ?>
+    <a href="<?php echo esc_url( home_url( '/' . $com['slug'] . '/' ) ); ?>" data-bs-dismiss="offcanvas"><?php echo esc_html( $com['label'] ); ?></a>
+    <?php endforeach; ?>
+    <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>"       data-bs-dismiss="offcanvas">4Dinner</a>
+    <a href="<?php echo esc_url( home_url( '/publicaciones/' ) ); ?>" data-bs-dismiss="offcanvas">Feed</a>
+    <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"          data-bs-dismiss="offcanvas">Blog</a>
+    <a href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>" data-bs-dismiss="offcanvas">Notificaciones</a>
+    <a href="<?php echo esc_url( $perfil_url ); ?>"                    data-bs-dismiss="offcanvas">Perfil</a>
+    <a href="<?php echo esc_url( home_url( '/configuracion/' ) ); ?>" data-bs-dismiss="offcanvas">Configuración</a>
+  </nav>
+  <div class="vx-drawer__actions">
+    <a href="<?php echo esc_url( wp_logout_url( home_url( '/login/' ) ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm w-100 justify-content-center"><i class="ti ti-logout"></i> Cerrar sesión</a>
+  </div>
+</div>

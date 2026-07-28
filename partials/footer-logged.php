@@ -42,7 +42,10 @@
     </div>
     <div class="footer-vx__bottom">
       <span>© <?php echo date( 'Y' ); ?> Vitrinexo SpA</span>
-      <span>Vitrinea, conecta y colabora.</span>
+      <span>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/privacidad/' ) ); ?>">Privacidad</a> ·
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/terminos/' ) ); ?>">Términos</a>
+      </span>
     </div>
   </div>
 </footer>
