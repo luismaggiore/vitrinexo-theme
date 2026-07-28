@@ -1349,6 +1349,11 @@ select.form-control-vx {
   color: var(--color-text-primary);
   background: var(--color-ice-200);
 }
+.vx-topbar__nav-desktop a.active {
+  color: var(--color-primary);
+  background: var(--color-ice-200);
+  font-weight: 500;
+}
 .vx-topbar__actions-desktop {
   display: flex;
   align-items: center;
