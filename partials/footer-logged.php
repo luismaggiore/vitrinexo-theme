@@ -26,7 +26,7 @@
       </nav>
       <nav class="footer-vx__nav" aria-label="Comunidades">
         <span class="footer-vx__label">Comunidades</span>
-        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/comunidad-out2b/' ) ); ?>">Out2B</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/comunidad-out2b/' ) ); ?>">LGBTQ+</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/comunidad-woman/' ) ); ?>">Woman</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/comunidad-senior/' ) ); ?>">Senior</a>
       </nav>

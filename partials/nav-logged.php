@@ -13,7 +13,7 @@ $vx_user_nav     = class_exists( 'VX_User' ) ? VX_User::get( $user_id ) : null;
 $mis_comunidades = [];
 if ( $vx_user_nav ) {
     $coms_map = [
-        'out2b'  => [ 'slug' => 'comunidad-out2b',  'label' => 'Out2B',  'icon' => 'ti-rainbow',       'color' => '#a855f7' ],
+        'out2b'  => [ 'slug' => 'comunidad-out2b',  'label' => 'LGBTQ+',  'icon' => 'ti-rainbow',       'color' => '#a855f7' ],
         'woman'  => [ 'slug' => 'comunidad-woman',   'label' => 'Woman',  'icon' => 'ti-gender-female', 'color' => '#ec4899' ],
         'senior' => [ 'slug' => 'comunidad-senior',  'label' => 'Senior', 'icon' => 'ti-award',         'color' => '#d97706' ],
     ];
