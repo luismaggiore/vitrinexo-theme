@@ -90,6 +90,12 @@ function vx_get_current_user_avatar_url(): string
         $url = wp_get_attachment_image_url( $foto_id, 'vx-avatar' );
         if ( $url ) return $url;
     }
+    // Sin foto: avatar generado (círculo Vitrinexo + iniciales).
+    if ( function_exists( 'vx_avatar_placeholder_datauri' ) && function_exists( 'vx_iniciales_de' ) ) {
+        $nombre   = (string) get_user_meta( $user_id, 'vx_nombre', true );
+        $apellido = (string) get_user_meta( $user_id, 'vx_apellido', true );
+        return vx_avatar_placeholder_datauri( vx_iniciales_de( $nombre, $apellido ) );
+    }
     return get_avatar_url( $user_id, [ 'size' => 200 ] );
 }
 
