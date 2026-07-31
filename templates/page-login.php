@@ -45,6 +45,18 @@ if ( is_user_logged_in() ) {
     });
   });
 
+  // Mostrar/ocultar contraseña en login
+  const pwdToggle = document.getElementById('login-pwd-toggle');
+  const pwdInput  = document.getElementById('login-password');
+  const pwdIcon   = document.getElementById('login-pwd-icon');
+  if (pwdToggle && pwdInput) {
+    pwdToggle.addEventListener('click', function () {
+      const show = pwdInput.type === 'password';
+      pwdInput.type = show ? 'text' : 'password';
+      if (pwdIcon) pwdIcon.className = show ? 'ti ti-eye-off' : 'ti ti-eye';
+    });
+  }
+
   // Login
   const loginForm = document.getElementById('vx-login-form');
   if (loginForm) {
