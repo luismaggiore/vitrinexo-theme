@@ -545,13 +545,13 @@ h2 strong {
   display: flex;
   align-items: flex-end;
   gap: 1rem;
-  padding: 0 1.5rem 1rem;
+  padding: 1.75rem 1.5rem 1rem;
   position: relative;
 }
 
 /* ── Avatar ── */
 .img-profile {
-  margin-top: -56px;
+  margin-top: 0;
   flex-shrink: 0;
   z-index: 2;
 }
@@ -794,11 +794,11 @@ a.profile-company:hover {
   .profile-row {
     flex-direction: column;
     align-items: flex-start;
-    padding: 0 1rem 1rem;
+    padding: 1.25rem 1rem 1rem;
   }
 
   .img-profile {
-    margin-top: -44px;
+    margin-top: 0;
   }
 
   .img-profile img {
