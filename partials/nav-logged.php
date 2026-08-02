@@ -71,6 +71,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
         <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/editar-perfil/' ) ); ?>"><i class="ti ti-pencil"></i>Editar perfil</a></li>
         <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>"><i class="ti ti-bell"></i>Notificaciones</a></li>
         <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/configuracion/' ) ); ?>"><i class="ti ti-settings"></i>Configuración</a></li>
+        <li><a class="dropdown-vx-item" href="<?php echo esc_url( home_url( '/ayuda/' ) ); ?>"><i class="ti ti-help-circle"></i>Ayuda</a></li>
         <li><hr class="dropdown-vx-divider my-1"></li>
         <li><a class="dropdown-vx-item danger" href="<?php echo esc_url( wp_logout_url( home_url( '/login/' ) ) ); ?>"><i class="ti ti-logout"></i>Cerrar sesión</a></li>
       </ul>
@@ -108,6 +109,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
     <a href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>" data-bs-dismiss="offcanvas">Notificaciones</a>
     <a href="<?php echo esc_url( $perfil_url ); ?>"                    data-bs-dismiss="offcanvas">Perfil</a>
     <a href="<?php echo esc_url( home_url( '/configuracion/' ) ); ?>" data-bs-dismiss="offcanvas">Configuración</a>
+    <a href="<?php echo esc_url( home_url( '/ayuda/' ) ); ?>"          data-bs-dismiss="offcanvas">Ayuda</a>
   </nav>
   <div class="vx-drawer__actions">
     <a href="<?php echo esc_url( wp_logout_url( home_url( '/login/' ) ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm w-100 justify-content-center"><i class="ti ti-logout"></i> Cerrar sesión</a>

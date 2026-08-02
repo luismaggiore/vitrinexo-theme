@@ -37,6 +37,7 @@
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/conexiones/' ) ); ?>">Mis conexiones</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>">Notificaciones</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/configuracion/' ) ); ?>">Configuración</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/ayuda/' ) ); ?>">Ayuda</a>
         <a class="footer-vx__link" href="<?php echo esc_url( wp_logout_url( home_url( '/login/' ) ) ); ?>">Cerrar sesión</a>
       </nav>
     </div>
