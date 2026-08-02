@@ -30,9 +30,15 @@ $has_reacted    = function_exists( 'vx_blog_usuario_reacciono' ) ? vx_blog_usuar
 $comments_count = (int) get_comments_number( $post_id );
 $rest_ns        = defined( 'VX_REST_NAMESPACE' ) ? VX_REST_NAMESPACE : 'vitrinexo/v1';
 $react_ep       = esc_url_raw( rest_url( $rest_ns . '/blog/' . $post_id . '/reaccion' ) );
+$creact_base    = esc_url_raw( rest_url( $rest_ns . '/blog/comentario/' ) );
 $rest_nonce     = wp_create_nonce( 'wp_rest' );
 $login_url      = home_url( '/login/' );
 $registro_url   = home_url( '/login/' );
+
+// Habilita el JS nativo de respuestas anidadas (hilos).
+if ( comments_open( $post_id ) ) {
+    wp_enqueue_script( 'comment-reply' );
+}
 
 $prev_post = get_previous_post();
 $next_post = get_next_post();
@@ -71,18 +77,18 @@ if ( is_user_logged_in() ) {
 
 <main>
 <div class="container py-4">
+  <!-- Breadcrumb (fuera de las columnas para alinear el título con el sidebar) -->
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb" style="font-size:12px;background:none;padding:0;margin:0">
+      <li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" class="link-primary-color">Blog</a></li>
+      <li class="breadcrumb-item active" style="color:var(--color-text-secondary)"><?php echo esc_html( $cat_name ); ?></li>
+    </ol>
+  </nav>
+
   <div class="row g-4 justify-content-center">
 
     <!-- ── COLUMNA ARTÍCULO ── -->
     <div class="col-12 col-lg-8">
-
-      <!-- Breadcrumb -->
-      <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb" style="font-size:12px;background:none;padding:0;margin:0">
-          <li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" class="link-primary-color">Blog</a></li>
-          <li class="breadcrumb-item active" style="color:var(--color-text-secondary)"><?php echo esc_html( $cat_name ); ?></li>
-        </ol>
-      </nav>
 
       <!-- Header artículo (título en caja propia, sin imagen) -->
       <div class="card-vx mb-4">
@@ -157,12 +163,12 @@ if ( is_user_logged_in() ) {
         <?php
         $vx_comments = get_comments( [ 'post_id' => $post_id, 'status' => 'approve', 'order' => 'ASC' ] );
         if ( $vx_comments ) : ?>
-        <ul class="vx-comment-list" style="list-style:none;padding:0;margin:1.5rem 0 0">
+        <ul class="vx-comment-list" style="list-style:none;padding:0;margin:1.25rem 0 0">
           <?php wp_list_comments( [
-              'avatar_size' => 40,
               'style'       => 'ul',
-              'short_ping'  => true,
-              'reply_text'  => '',
+              'callback'    => 'vx_render_comment',
+              'max_depth'   => 4,
+              'avatar_size' => 40,
           ], $vx_comments ); ?>
         </ul>
         <?php endif; ?>
@@ -171,22 +177,42 @@ if ( is_user_logged_in() ) {
       <?php if ( $is_logged ) : ?>
       <script>
       (function(){
+        var NONCE = <?php echo wp_json_encode( $rest_nonce ); ?>;
+        // Reacción al artículo
         var btn = document.getElementById('vx-react-btn');
-        if (!btn) return;
-        btn.addEventListener('click', function(){
-          btn.disabled = true;
-          fetch(<?php echo wp_json_encode( $react_ep ); ?>, {
-            method:'POST',
-            headers:{'X-WP-Nonce': <?php echo wp_json_encode( $rest_nonce ); ?>}
+        if (btn) {
+          btn.addEventListener('click', function(){
+            btn.disabled = true;
+            fetch(<?php echo wp_json_encode( $react_ep ); ?>, {
+              method:'POST', headers:{'X-WP-Nonce': NONCE}
+            }).then(function(r){ return r.json(); }).then(function(d){
+              if (d && d.success) {
+                document.getElementById('vx-react-count').textContent = d.count;
+                btn.classList.toggle('btn-primary-vx', d.reacted);
+                btn.classList.toggle('btn-ghost-vx', !d.reacted);
+                btn.dataset.reacted = d.reacted ? '1' : '0';
+              }
+              btn.disabled = false;
+            }).catch(function(){ btn.disabled = false; });
+          });
+        }
+        // Reacciones a comentarios (me gusta)
+        var CBASE = <?php echo wp_json_encode( $creact_base ); ?>;
+        document.addEventListener('click', function(e){
+          var b = e.target.closest ? e.target.closest('.vx-creact-btn') : null;
+          if (!b) return;
+          b.disabled = true;
+          fetch(CBASE + b.dataset.id + '/reaccion', {
+            method:'POST', headers:{'X-WP-Nonce': NONCE}
           }).then(function(r){ return r.json(); }).then(function(d){
             if (d && d.success) {
-              document.getElementById('vx-react-count').textContent = d.count;
-              btn.classList.toggle('btn-primary-vx', d.reacted);
-              btn.classList.toggle('btn-ghost-vx', !d.reacted);
-              btn.dataset.reacted = d.reacted ? '1' : '0';
+              var c = b.querySelector('.vx-creact-count'); if (c) c.textContent = d.count;
+              b.dataset.reacted = d.reacted ? '1' : '0';
+              b.style.color = d.reacted ? 'var(--color-primary)' : 'var(--color-text-secondary)';
+              var ic = b.querySelector('i'); if (ic) ic.className = d.reacted ? 'ti ti-heart-filled' : 'ti ti-heart';
             }
-            btn.disabled = false;
-          }).catch(function(){ btn.disabled = false; });
+            b.disabled = false;
+          }).catch(function(){ b.disabled = false; });
         });
       })();
       </script>

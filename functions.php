@@ -197,3 +197,74 @@ add_action( 'template_redirect', function () {
         }
     }
 } );
+
+// ─── Comentarios del blog (hilos + reacción + avatar/enlace a perfil) ──────────
+
+/** URL del perfil público de Vitrinexo de un usuario (o '' si no tiene slug). */
+function vx_user_profile_url( int $user_id ): string {
+    if ( ! $user_id ) return '';
+    $slug = (string) get_user_meta( $user_id, 'vx_perfil_slug', true );
+    return $slug ? home_url( '/perfil/' . $slug . '/' ) : '';
+}
+
+/**
+ * Render de un comentario en estilo Vitrinexo.
+ * - Avatar = foto de perfil (vía filtro pre_get_avatar_data).
+ * - Nombre enlaza al perfil del autor (si es miembro con slug).
+ * - Fecha en texto plano (sin hipervínculo).
+ * - Botón "Responder" (hilos) y reacción (me gusta).
+ * NOTA: abre el <li> sin cerrarlo; Walker_Comment cierra tras los hijos.
+ */
+function vx_render_comment( $comment, $args, $depth ) {
+    $uid         = (int) $comment->user_id;
+    $author      = get_comment_author( $comment );
+    $profile_url = vx_user_profile_url( $uid );
+    $is_logged   = is_user_logged_in();
+    $cid         = (int) $comment->comment_ID;
+
+    $rc      = function_exists( 'vx_comentario_reacciones_count' ) ? vx_comentario_reacciones_count( $cid ) : 0;
+    $reacted = ( $is_logged && function_exists( 'vx_usuario_reacciono_comentario' ) )
+        ? vx_usuario_reacciono_comentario( $cid, get_current_user_id() ) : false;
+
+    $reply = '';
+    if ( $is_logged ) {
+        $reply = get_comment_reply_link( array_merge( $args, [
+            'reply_text' => '<i class="ti ti-arrow-back-up"></i> Responder',
+            'depth'      => $depth,
+            'max_depth'  => $args['max_depth'] ?? 4,
+        ] ), $comment );
+    }
+    ?>
+    <li <?php comment_class( 'vx-comment', $comment ); ?> id="comment-<?php echo $cid; ?>">
+      <div class="vx-comment__row" style="display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--color-border)">
+        <?php echo get_avatar( $comment, 40, '', $author, [ 'class' => 'vx-comment__avatar', 'style' => 'width:40px;height:40px;border-radius:var(--radius-sm);object-fit:cover;flex-shrink:0' ] ); ?>
+        <div style="flex:1;min-width:0">
+          <div class="d-flex align-items-center gap-2 flex-wrap" style="margin-bottom:2px">
+            <?php if ( $profile_url ) : ?>
+              <a href="<?php echo esc_url( $profile_url ); ?>" class="text-body-label link-primary-color" style="font-weight:600"><?php echo esc_html( $author ); ?></a>
+            <?php else : ?>
+              <span class="text-body-label" style="font-weight:600"><?php echo esc_html( $author ); ?></span>
+            <?php endif; ?>
+            <span class="text-xs-muted"><?php echo esc_html( get_comment_date( 'j M Y · H:i', $comment ) ); ?></span>
+          </div>
+          <div class="vx-comment__text" style="color:var(--color-text-primary);line-height:1.55;margin-bottom:6px">
+            <?php comment_text( $comment ); ?>
+          </div>
+          <div class="d-flex align-items-center gap-3" style="font-size:13px">
+            <?php if ( $is_logged ) : ?>
+            <button class="vx-creact-btn btn-plain-vx" data-id="<?php echo $cid; ?>" data-reacted="<?php echo $reacted ? '1' : '0'; ?>"
+                    style="background:none;border:none;cursor:pointer;padding:0;color:<?php echo $reacted ? 'var(--color-primary)' : 'var(--color-text-secondary)'; ?>;font-weight:600;display:inline-flex;align-items:center;gap:4px">
+              <i class="ti ti-heart<?php echo $reacted ? '-filled' : ''; ?>"></i> <span class="vx-creact-count"><?php echo (int) $rc; ?></span>
+            </button>
+            <?php else : ?>
+            <span class="text-xs-muted" style="display:inline-flex;align-items:center;gap:4px"><i class="ti ti-heart"></i> <?php echo (int) $rc; ?></span>
+            <?php endif; ?>
+            <?php if ( $reply ) : ?>
+            <span class="vx-comment__reply" style="font-size:13px"><?php echo $reply; ?></span>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
+    <?php
+    // Sin </li>: lo cierra Walker_Comment tras renderizar las respuestas anidadas.
+}
