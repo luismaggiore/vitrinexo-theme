@@ -24,12 +24,29 @@
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">4Dinner</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a>
       </nav>
+      <?php
+      // Solo se listan las comunidades a las que el usuario pertenece.
+      $vx_footer_user = class_exists( 'VX_User' ) ? VX_User::get( get_current_user_id() ) : null;
+      $vx_footer_coms = [];
+      if ( $vx_footer_user ) {
+          foreach ( [
+              'out2b'  => [ 'slug' => 'comunidad-out2b',  'label' => 'LGBTQ+' ],
+              'woman'  => [ 'slug' => 'comunidad-woman',   'label' => 'Woman' ],
+              'senior' => [ 'slug' => 'comunidad-senior',  'label' => 'Senior' ],
+          ] as $vx_cid => $vx_cdata ) {
+              if ( $vx_footer_user->is_in_community( $vx_cid ) ) {
+                  $vx_footer_coms[] = $vx_cdata;
+              }
+          }
+      }
+      if ( $vx_footer_coms ) : ?>
       <nav class="footer-vx__nav" aria-label="Comunidades">
         <span class="footer-vx__label">Comunidades</span>
-        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/comunidad-out2b/' ) ); ?>">LGBTQ+</a>
-        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/comunidad-woman/' ) ); ?>">Woman</a>
-        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/comunidad-senior/' ) ); ?>">Senior</a>
+        <?php foreach ( $vx_footer_coms as $vx_c ) : ?>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/' . $vx_c['slug'] . '/' ) ); ?>"><?php echo esc_html( $vx_c['label'] ); ?></a>
+        <?php endforeach; ?>
       </nav>
+      <?php endif; ?>
       <nav class="footer-vx__nav" aria-label="Mi cuenta">
         <span class="footer-vx__label">Mi cuenta</span>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>">Dashboard</a>
