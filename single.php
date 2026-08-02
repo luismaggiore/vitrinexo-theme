@@ -23,11 +23,16 @@ $tags        = get_the_tags() ?: [];
 $cat_name    = $categories[0]->name ?? 'Blog';
 $read_time   = max( 1, (int) ceil( str_word_count( wp_strip_all_tags( $content ) ) / 200 ) );
 
-$has_thumb   = has_post_thumbnail();
-$thumb_url   = $has_thumb ? get_the_post_thumbnail_url( $post_id, 'vx-banner' ) : '';
-$hero_style  = $has_thumb
-    ? 'background:url(' . esc_url( $thumb_url ) . ') center/cover no-repeat'
-    : 'background:linear-gradient(135deg,var(--color-cyan-700) 0%,var(--color-green-600) 100%)';
+$is_logged      = is_user_logged_in();
+$current_uid    = get_current_user_id();
+$react_count    = function_exists( 'vx_blog_reacciones_count' ) ? vx_blog_reacciones_count( $post_id ) : 0;
+$has_reacted    = function_exists( 'vx_blog_usuario_reacciono' ) ? vx_blog_usuario_reacciono( $post_id, $current_uid ) : false;
+$comments_count = (int) get_comments_number( $post_id );
+$rest_ns        = defined( 'VX_REST_NAMESPACE' ) ? VX_REST_NAMESPACE : 'vitrinexo/v1';
+$react_ep       = esc_url_raw( rest_url( $rest_ns . '/blog/' . $post_id . '/reaccion' ) );
+$rest_nonce     = wp_create_nonce( 'wp_rest' );
+$login_url      = home_url( '/login/' );
+$registro_url   = home_url( '/login/' );
 
 $prev_post = get_previous_post();
 $next_post = get_next_post();
@@ -79,32 +84,24 @@ if ( is_user_logged_in() ) {
         </ol>
       </nav>
 
-      <!-- Header artículo -->
-      <div class="card-vx p-0 mb-4 overflow-hidden">
-        <div style="height:220px;<?php echo esc_attr( $hero_style ); ?>;display:flex;align-items:flex-end;padding:1.5rem;position:relative">
-          <div>
-            <span class="tag-vx" style="background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3);color:#fff;margin-bottom:.75rem;display:inline-block">
-              <?php echo esc_html( $cat_name ); ?>
-            </span>
-            <h1 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:600;color:#fff;line-height:1.2;margin:0;max-width:600px">
-              <?php echo esc_html( $title ); ?>
-            </h1>
+      <!-- Header artículo (título en caja propia, sin imagen) -->
+      <div class="card-vx mb-4">
+        <span class="section-landing-label" style="margin:0 0 .6rem;display:inline-block"><?php echo esc_html( $cat_name ); ?></span>
+        <h1 style="font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;color:var(--color-text-primary);line-height:1.2;margin:0 0 1rem">
+          <?php echo esc_html( $title ); ?>
+        </h1>
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3" style="border-top:1px solid var(--color-border);padding-top:1rem">
+          <div class="d-flex align-items-center gap-2">
+            <img src="<?php echo esc_url( $avatar_url ); ?>" class="avatar-36" alt="<?php echo esc_attr( $author_name ); ?>">
+            <div>
+              <div class="text-body-label"><?php echo esc_html( $author_name ); ?></div>
+              <div class="text-xs-muted"><?php echo esc_html( $date ); ?> · <?php echo esc_html( $read_time ); ?> min de lectura</div>
+            </div>
           </div>
-        </div>
-        <div class="article-meta-bar">
-          <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-            <div class="d-flex align-items-center gap-2">
-              <img src="<?php echo esc_url( $avatar_url ); ?>" class="avatar-36" alt="<?php echo esc_attr( $author_name ); ?>">
-              <div>
-                <div class="text-body-label"><?php echo esc_html( $author_name ); ?></div>
-                <div class="text-xs-muted"><?php echo esc_html( $date ); ?> · <?php echo esc_html( $read_time ); ?> min de lectura</div>
-              </div>
-            </div>
-            <div class="d-flex gap-2">
-              <button class="btn-vx btn-ghost-vx btn-vx-sm" onclick="navigator.share ? navigator.share({title:<?php echo wp_json_encode( $title ); ?>,url:window.location.href}) : navigator.clipboard.writeText(window.location.href)">
-                <i class="ti ti-share-2"></i> Compartir
-              </button>
-            </div>
+          <div class="d-flex gap-2">
+            <button class="btn-vx btn-ghost-vx btn-vx-sm" onclick="navigator.share ? navigator.share({title:<?php echo wp_json_encode( $title ); ?>,url:window.location.href}) : navigator.clipboard.writeText(window.location.href)">
+              <i class="ti ti-share-2"></i> Compartir
+            </button>
           </div>
         </div>
       </div>
@@ -113,6 +110,87 @@ if ( is_user_logged_in() ) {
       <div class="card-vx mb-4 article-body">
         <?php echo apply_filters( 'the_content', $content ); ?>
       </div>
+
+      <!-- Reacciones -->
+      <div class="card-vx mb-4 d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div class="text-sm-muted">¿Te sirvió este artículo?</div>
+        <?php if ( $is_logged ) : ?>
+        <button id="vx-react-btn" class="btn-vx btn-vx-sm <?php echo $has_reacted ? 'btn-primary-vx' : 'btn-ghost-vx'; ?>"
+                data-reacted="<?php echo $has_reacted ? '1' : '0'; ?>">
+          <i class="ti ti-hand-love-you me-1"></i> Aplaudir · <span id="vx-react-count"><?php echo (int) $react_count; ?></span>
+        </button>
+        <?php else : ?>
+        <a href="<?php echo esc_url( $login_url ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm">
+          <i class="ti ti-hand-love-you me-1"></i> Aplaudir · <?php echo (int) $react_count; ?>
+        </a>
+        <?php endif; ?>
+      </div>
+
+      <!-- Comentarios -->
+      <div class="card-vx mb-4" id="comentarios">
+        <h3 class="subsection-title mb-3" style="font-size:16px">
+          Comentarios<?php echo $comments_count ? ' · ' . (int) $comments_count : ''; ?>
+        </h3>
+
+        <?php if ( $is_logged ) : ?>
+          <?php
+          comment_form( [
+              'title_reply'         => '',
+              'label_submit'        => 'Publicar comentario',
+              'class_submit'        => 'btn-vx btn-primary-vx btn-vx-sm',
+              'comment_notes_before'=> '',
+              'comment_notes_after' => '',
+              'logged_in_as'        => '',
+              'comment_field'       => '<div class="mb-3"><textarea name="comment" class="form-control-vx" rows="3" placeholder="Escribe un comentario..." required></textarea></div>',
+          ] );
+          ?>
+        <?php else : ?>
+          <div class="cta-card" style="text-align:center;padding:20px">
+            <p class="text-body-muted mb-3">Inicia sesión o inscríbete en Vitrinexo para dejar un comentario.</p>
+            <div class="d-flex gap-2 justify-content-center flex-wrap">
+              <a href="<?php echo esc_url( $login_url ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm">Ingresar</a>
+              <a href="<?php echo esc_url( $registro_url ); ?>" class="btn-vx btn-primary-vx btn-vx-sm">Inscríbete</a>
+            </div>
+          </div>
+        <?php endif; ?>
+
+        <?php
+        $vx_comments = get_comments( [ 'post_id' => $post_id, 'status' => 'approve', 'order' => 'ASC' ] );
+        if ( $vx_comments ) : ?>
+        <ul class="vx-comment-list" style="list-style:none;padding:0;margin:1.5rem 0 0">
+          <?php wp_list_comments( [
+              'avatar_size' => 40,
+              'style'       => 'ul',
+              'short_ping'  => true,
+              'reply_text'  => '',
+          ], $vx_comments ); ?>
+        </ul>
+        <?php endif; ?>
+      </div>
+
+      <?php if ( $is_logged ) : ?>
+      <script>
+      (function(){
+        var btn = document.getElementById('vx-react-btn');
+        if (!btn) return;
+        btn.addEventListener('click', function(){
+          btn.disabled = true;
+          fetch(<?php echo wp_json_encode( $react_ep ); ?>, {
+            method:'POST',
+            headers:{'X-WP-Nonce': <?php echo wp_json_encode( $rest_nonce ); ?>}
+          }).then(function(r){ return r.json(); }).then(function(d){
+            if (d && d.success) {
+              document.getElementById('vx-react-count').textContent = d.count;
+              btn.classList.toggle('btn-primary-vx', d.reacted);
+              btn.classList.toggle('btn-ghost-vx', !d.reacted);
+              btn.dataset.reacted = d.reacted ? '1' : '0';
+            }
+            btn.disabled = false;
+          }).catch(function(){ btn.disabled = false; });
+        });
+      })();
+      </script>
+      <?php endif; ?>
 
       <!-- Tags y navegación entre artículos -->
       <div class="card-vx d-flex align-items-center justify-content-between flex-wrap gap-3 mb-5">
@@ -158,9 +236,16 @@ if ( is_user_logged_in() ) {
         <p class="text-sm-muted" style="line-height:1.6;margin-bottom:.75rem"><?php echo esc_html( $author_bio ); ?></p>
         <?php endif; ?>
         <?php if ( $author_slug ) : ?>
-        <a href="<?php echo esc_url( home_url( '/perfil/' . $author_slug . '/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm w-100">
-          <i class="ti ti-user me-1"></i> Ver perfil en Vitrinexo
-        </a>
+          <?php if ( $is_logged ) : ?>
+          <a href="<?php echo esc_url( home_url( '/perfil/' . $author_slug . '/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm w-100">
+            <i class="ti ti-user me-1"></i> Ver perfil en Vitrinexo
+          </a>
+          <?php else : ?>
+          <a href="<?php echo esc_url( $registro_url ); ?>" class="btn-vx btn-soft-primary btn-vx-sm w-100">
+            <i class="ti ti-lock me-1"></i> Inscríbete para ver su perfil
+          </a>
+          <div class="text-xs-muted text-center mt-2">¿Ya eres miembro? <a href="<?php echo esc_url( $login_url ); ?>" class="link-primary-color">Inicia sesión</a></div>
+          <?php endif; ?>
         <?php endif; ?>
       </div>
 
