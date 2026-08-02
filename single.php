@@ -100,7 +100,7 @@ if ( is_user_logged_in() ) {
           <div class="d-flex align-items-center gap-2">
             <img src="<?php echo esc_url( $avatar_url ); ?>" class="avatar-36" alt="<?php echo esc_attr( $author_name ); ?>">
             <div>
-              <div class="text-body-label"><?php echo esc_html( $author_name ); ?></div>
+              <div class="text-body-label"><?php echo function_exists( 'vx_nombre_enlazado' ) ? vx_nombre_enlazado( $author_id, $author_name, 'link-primary-color' ) : esc_html( $author_name ); ?></div>
               <div class="text-xs-muted"><?php echo esc_html( $date ); ?> · <?php echo esc_html( $read_time ); ?> min de lectura</div>
             </div>
           </div>
@@ -252,7 +252,7 @@ if ( is_user_logged_in() ) {
                style="width:52px;height:52px;border-radius:var(--radius-sm);object-fit:cover;border:2px solid var(--color-border)"
                alt="<?php echo esc_attr( $author_name ); ?>">
           <div>
-            <div style="font-size:14px;font-weight:600;color:var(--color-text-primary)"><?php echo esc_html( $author_name ); ?></div>
+            <div style="font-size:14px;font-weight:600"><?php echo function_exists( 'vx_nombre_enlazado' ) ? vx_nombre_enlazado( $author_id, $author_name, 'link-primary-color' ) : esc_html( $author_name ); ?></div>
             <?php if ( $author_role ) : ?>
             <div class="text-xs-muted"><?php echo esc_html( $author_role ); ?></div>
             <?php endif; ?>
