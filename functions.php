@@ -165,7 +165,7 @@ add_filter( 'template_include', function ( string $template ): string {
         'landing-4dinner'         => 'page-4dinner-public',
         '4dinner'                 => 'page-4dinner',
         'mis-eventos'             => 'page-mis-eventos',
-        'publicaciones'           => 'page-publicaciones',
+        'oportunidades'           => 'page-publicaciones',
         'mis-publicaciones'       => 'page-mis-publicaciones',
         'blog'                    => 'page-blog',
         'recuperar-contrasena'    => 'page-recuperar-contrasena',
@@ -185,6 +185,16 @@ add_filter( 'template_include', function ( string $template ): string {
 
     return $template;
 } );
+
+// ─── Redirección 301: /publicaciones/ → /oportunidades/ ─────────────────────────
+
+add_action( 'template_redirect', function () {
+    $path = trim( parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+    if ( $path === 'publicaciones' ) {
+        wp_safe_redirect( home_url( '/oportunidades/' ), 301 );
+        exit;
+    }
+}, 1 );
 
 // ─── 404 personalizado ────────────────────────────────────────────────────────
 
