@@ -146,6 +146,7 @@ add_filter( 'template_include', function ( string $template ): string {
         'onboarding'              => 'page-onboarding',
         'dashboard'               => 'page-dashboard',
         'directorio'              => 'page-directorio',
+        'ayuda'                   => 'page-ayuda',
         'busqueda'                => 'page-search-results',
         'matches'                 => 'page-matches',
         'match-seeks'             => 'page-matches',
