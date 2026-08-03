@@ -49,7 +49,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
     </div>
     <?php endif; ?>
     <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>"<?php echo is_page( '4dinner' ) ? ' class="active"' : ''; ?>>4Dinner</a>
-    <a href="<?php echo esc_url( home_url( '/publicaciones/' ) ); ?>"<?php echo is_page( 'publicaciones' ) ? ' class="active"' : ''; ?>>Feed</a>
+    <a href="<?php echo esc_url( home_url( '/publicaciones/' ) ); ?>"<?php echo is_page( 'publicaciones' ) ? ' class="active"' : ''; ?>>Oportunidades</a>
     <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"<?php echo is_page( 'blog' ) ? ' class="active"' : ''; ?>>Blog</a>
   </nav>
 
@@ -104,7 +104,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
     <a href="<?php echo esc_url( home_url( '/' . $com['slug'] . '/' ) ); ?>" data-bs-dismiss="offcanvas"><?php echo esc_html( $com['label'] ); ?></a>
     <?php endforeach; ?>
     <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>"       data-bs-dismiss="offcanvas">4Dinner</a>
-    <a href="<?php echo esc_url( home_url( '/publicaciones/' ) ); ?>" data-bs-dismiss="offcanvas">Feed</a>
+    <a href="<?php echo esc_url( home_url( '/publicaciones/' ) ); ?>" data-bs-dismiss="offcanvas">Oportunidades</a>
     <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"          data-bs-dismiss="offcanvas">Blog</a>
     <a href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>" data-bs-dismiss="offcanvas">Notificaciones</a>
     <a href="<?php echo esc_url( $perfil_url ); ?>"                    data-bs-dismiss="offcanvas">Perfil</a>

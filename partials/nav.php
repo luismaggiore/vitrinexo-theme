@@ -8,16 +8,16 @@
 
   <!-- Links desktop -->
   <nav class="vx-topbar__nav-desktop">
-    <a href="#el-problema">El problema</a>
-    <a href="#como-funciona">Cómo funciona</a>
-    <a href="#para-quien">Para quién es</a>
-    <a href="#el-multiverso">El multiverso</a>
-    <a href="#for-dinner">Experiencia presencial</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#el-problema">El problema</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#como-funciona">Cómo funciona</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#para-quien">Para quién es</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#el-multiverso">El multiverso</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#for-dinner">Experiencia presencial</a>
   </nav>
 
   <!-- Acciones desktop -->
   <div class="vx-topbar__actions-desktop">
-    <a href="#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm">Inscríbete →</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm">Inscríbete →</a>
     <a href="<?php echo esc_url( home_url( '/login/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm">Ingresar</a>
   </div>
 
@@ -38,14 +38,14 @@
     </button>
   </div>
   <nav class="vx-drawer__nav">
-    <a href="#el-problema"   data-bs-dismiss="offcanvas">El problema</a>
-    <a href="#como-funciona" data-bs-dismiss="offcanvas">Cómo funciona</a>
-    <a href="#para-quien"    data-bs-dismiss="offcanvas">Para quién es</a>
-    <a href="#el-multiverso" data-bs-dismiss="offcanvas">El multiverso</a>
-    <a href="#for-dinner"    data-bs-dismiss="offcanvas">Experiencia presencial</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#el-problema"   data-bs-dismiss="offcanvas">El problema</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#como-funciona" data-bs-dismiss="offcanvas">Cómo funciona</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#para-quien"    data-bs-dismiss="offcanvas">Para quién es</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#el-multiverso" data-bs-dismiss="offcanvas">El multiverso</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#for-dinner"    data-bs-dismiss="offcanvas">Experiencia presencial</a>
   </nav>
   <div class="vx-drawer__actions">
-    <a href="#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm w-100 justify-content-center mb-2" data-bs-dismiss="offcanvas">Inscríbete →</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm w-100 justify-content-center mb-2" data-bs-dismiss="offcanvas">Inscríbete →</a>
     <a href="<?php echo esc_url( home_url( '/login/' ) ); ?>" class="btn-vx btn-ghost-vx btn-vx-sm w-100 justify-content-center">Ingresar</a>
   </div>
 </div>
