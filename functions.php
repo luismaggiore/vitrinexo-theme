@@ -166,6 +166,7 @@ add_filter( 'template_include', function ( string $template ): string {
         '4dinner'                 => 'page-4dinner',
         'mis-eventos'             => 'page-mis-eventos',
         'oportunidades'           => 'page-publicaciones',
+        'preguntas-frecuentes'    => 'page-faq',
         'mis-publicaciones'       => 'page-mis-publicaciones',
         'blog'                    => 'page-blog',
         'recuperar-contrasena'    => 'page-recuperar-contrasena',
