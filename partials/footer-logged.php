@@ -23,6 +23,7 @@
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>">Mis favoritos</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">4Dinner</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Preguntas frecuentes</a>
       </nav>
       <?php
       // Solo se listan las comunidades a las que el usuario pertenece.

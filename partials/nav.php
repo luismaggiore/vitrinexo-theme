@@ -13,6 +13,7 @@
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#para-quien">Para quién es</a>
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#el-multiverso">El multiverso</a>
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#for-dinner">Experiencia presencial</a>
+    <a href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Preguntas frecuentes</a>
   </nav>
 
   <!-- Acciones desktop -->
@@ -43,6 +44,7 @@
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#para-quien"    data-bs-dismiss="offcanvas">Para quién es</a>
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#el-multiverso" data-bs-dismiss="offcanvas">El multiverso</a>
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#for-dinner"    data-bs-dismiss="offcanvas">Experiencia presencial</a>
+    <a href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>" data-bs-dismiss="offcanvas">Preguntas frecuentes</a>
   </nav>
   <div class="vx-drawer__actions">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm w-100 justify-content-center mb-2" data-bs-dismiss="offcanvas">Inscríbete →</a>

@@ -51,6 +51,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
     <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>"<?php echo is_page( '4dinner' ) ? ' class="active"' : ''; ?>>4Dinner</a>
     <a href="<?php echo esc_url( home_url( '/oportunidades/' ) ); ?>"<?php echo is_page( 'oportunidades' ) ? ' class="active"' : ''; ?>>Oportunidades</a>
     <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"<?php echo is_page( 'blog' ) ? ' class="active"' : ''; ?>>Blog</a>
+    <a href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>"<?php echo is_page( 'preguntas-frecuentes' ) ? ' class="active"' : ''; ?>>Preguntas frecuentes</a>
   </nav>
 
   <!-- Acciones desktop: notificaciones + menú de cuenta -->
@@ -106,6 +107,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
     <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>"       data-bs-dismiss="offcanvas">4Dinner</a>
     <a href="<?php echo esc_url( home_url( '/oportunidades/' ) ); ?>" data-bs-dismiss="offcanvas">Oportunidades</a>
     <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"          data-bs-dismiss="offcanvas">Blog</a>
+    <a href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>" data-bs-dismiss="offcanvas">Preguntas frecuentes</a>
     <a href="<?php echo esc_url( home_url( '/notificaciones/' ) ); ?>" data-bs-dismiss="offcanvas">Notificaciones</a>
     <a href="<?php echo esc_url( $perfil_url ); ?>"                    data-bs-dismiss="offcanvas">Perfil</a>
     <a href="<?php echo esc_url( home_url( '/configuracion/' ) ); ?>" data-bs-dismiss="offcanvas">Configuración</a>

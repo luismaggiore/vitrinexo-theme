@@ -22,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         <a class="footer-vx__link" href="#como-funciona">Cómo funciona</a>
         <a class="footer-vx__link" href="#para-quien">Para quién es</a>
         <a class="footer-vx__link" href="#for-dinner">Experiencia presencial</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Preguntas frecuentes</a>
       </nav>
       <nav class="footer-vx__nav" aria-label="Comunidades">
         <span class="footer-vx__label">Comunidades</span>
