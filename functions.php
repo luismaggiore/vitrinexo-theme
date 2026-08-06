@@ -187,6 +187,25 @@ add_filter( 'template_include', function ( string $template ): string {
     return $template;
 } );
 
+// ─── Google Analytics (GA4) ─────────────────────────────────────────────────
+
+add_action( 'wp_head', function () {
+    // No rastreamos a administradores para no ensuciar las métricas.
+    if ( current_user_can( 'manage_options' ) ) {
+        return;
+    }
+    ?>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQS9JSS56Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push( arguments ); }
+      gtag( 'js', new Date() );
+      gtag( 'config', 'G-KQS9JSS56Y' );
+    </script>
+    <?php
+}, 1 );
+
 // ─── Redirección 301: /publicaciones/ → /oportunidades/ ─────────────────────────
 
 add_action( 'template_redirect', function () {
