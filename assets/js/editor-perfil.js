@@ -177,4 +177,28 @@
     } );
   } );
 
+  // ── Propuesta de perfil (admin → usuario) ──────────────────────────────────
+
+  window.vxResolverPropuesta = function ( accion ) {
+    var banner = document.getElementById( 'vx-propuesta-banner' );
+    var botones = banner ? banner.querySelectorAll( 'button' ) : [];
+    botones.forEach( function ( b ) { b.disabled = true; } );
+
+    fetch( vx_data.api_url + 'perfil/propuesta/' + accion, {
+      method: 'POST',
+      headers: { 'X-WP-Nonce': vx_data.nonce },
+    } )
+      .then( function ( res ) { return res.json(); } )
+      .then( function ( json ) {
+        if ( json.success ) {
+          window.location.reload();
+        } else {
+          botones.forEach( function ( b ) { b.disabled = false; } );
+        }
+      } )
+      .catch( function () {
+        botones.forEach( function ( b ) { b.disabled = false; } );
+      } );
+  };
+
 } )();
