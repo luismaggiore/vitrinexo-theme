@@ -112,6 +112,9 @@
     } );
   }
 
+  // Exponer para los handlers inline de logo (empresa) del shortcode.
+  window.vxCropSquare = vxCropSquare;
+
   // ── Foto de usuario (tipo='foto') ─────────────────────────────────────────────
 
   document.querySelectorAll( 'input[data-upload-type="foto"]' ).forEach( function ( input ) {
