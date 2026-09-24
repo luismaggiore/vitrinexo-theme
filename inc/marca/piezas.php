@@ -79,6 +79,20 @@ function vx_marca_kses(): array {
 }
 
 /**
+ * Una foto de referencia con su pie. El pie no describe lo que se ve, que ya
+ * se ve: dice qué hay que repetir de esa foto.
+ */
+function vx_marca_foto( string $archivo, string $alt, string $pie ): void {
+    ?>
+    <figure class="vx-foto">
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/marca/' . $archivo ); ?>"
+             alt="<?php echo esc_attr( $alt ); ?>" class="vx-imagen" loading="lazy">
+        <figcaption class="vx-nota"><?php echo esc_html( $pie ); ?></figcaption>
+    </figure>
+    <?php
+}
+
+/**
  * Una palabra y lo que trae puesto. Sirve para un valor y para un público: los
  * dos son una palabra que no significa nada hasta que dice qué cambia por
  * tenerla.

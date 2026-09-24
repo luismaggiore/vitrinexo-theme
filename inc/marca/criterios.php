@@ -70,7 +70,7 @@ function vx_marca_partes(): array {
                 [ 'Paleta de color', 'parcial', 'Las dos capas están escritas. El teal de marca no llega al mínimo de contraste y la salida está sin decidir.' ],
                 [ 'Iconografía', 'definido', 'Tabler Icons 3.19.0, trazo de 2 px sobre rejilla de 24. Una sola familia.' ],
                 [ 'Motivos', 'definido', 'La red: puntos que se unen. Va detrás del contenido y nunca encima.' ],
-                [ 'Dirección fotográfica', 'pendiente' ],
+                [ 'Dirección fotográfica', 'definido', 'Gente trabajando, nunca posando. Dos registros de luz y la silueta del nexo como recurso propio.' ],
                 [ 'Favicon', 'pendiente', 'El sitio no declara ninguno. Depende del isotipo.' ],
                 [ 'Imagen para compartir', 'pendiente', 'Quien pega un enlace de Vitrinexo ve una tarjeta vacía.' ],
             ],

@@ -23,7 +23,9 @@ for ( const archivo of [ 'templates/page-marca.php', 'inc/marca/contenido.php', 
   const etiquetas = fuente.replace( /<\?php[\s\S]*?\?>/g, 'PHP' );
 
   // Ninguna otra copia del logotipo.
-  for ( const [ , ruta ] of fuente.matchAll( /assets\/img\/([\w.-]+\.(?:svg|png|jpe?g))/g ) ) {
+  // Las fotos de referencia del manual viven en su propia carpeta y no son
+  // logotipos; lo que se vigila es que nadie apunte a otra copia de la marca.
+  for ( const [ , ruta ] of fuente.matchAll( /assets\/img\/(?!marca\/)([\w.-]+\.(?:svg|png|jpe?g))/g ) ) {
     if ( `assets/img/${ ruta }` !== OFICIAL ) fallos.push( `${ archivo } apunta a ${ ruta } en vez de al archivo oficial` );
   }
 

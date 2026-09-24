@@ -10,20 +10,34 @@ import { informar } from '../comun.mjs';
 import { ANCHOS, enLaPagina } from '../comun-pantalla.mjs';
 
 const fallos = await enLaPagina(
-  async ( pagina ) =>
-    pagina.evaluate( () => {
+  async ( pagina ) => {
+    // Las fotos van con loading="lazy", así que medir apenas termina la red da
+    // por no cargada a la que todavía está pidiéndose. Se espera a que cada una
+    // resuelva, para bien o para mal: lo que se quiere saber es cuál falló, no
+    // cuál iba lenta.
+    await pagina.evaluate( () => Promise.all(
+      [ ...document.images ].map( ( img ) => img.complete ? null : new Promise( ( listo ) => {
+        img.addEventListener( 'load', listo, { once: true } );
+        img.addEventListener( 'error', listo, { once: true } );
+      } ) )
+    ) );
+
+    return pagina.evaluate( () => {
       const malos = [];
       for ( const img of document.images ) {
+        // El nombre sale del atributo y no de currentSrc: cuando la imagen no
+        // carga, currentSrc viene vacío y el fallo no dice cuál es.
+        const nombre = ( img.getAttribute( 'src' ) || '(sin src)' ).split( '/' ).pop();
         const alt = img.getAttribute( 'alt' );
         const decorativa = img.getAttribute( 'aria-hidden' ) === 'true' || alt === '';
         if ( alt === null ) {
-          malos.push( `${ img.currentSrc.split( '/' ).pop() } no dice qué hay en ella` );
+          malos.push( `${ nombre } no dice qué hay en ella` );
         } else if ( ! decorativa && alt.trim().length < 3 ) {
-          malos.push( `${ img.currentSrc.split( '/' ).pop() } tiene un alt que no describe nada: «${ alt }»` );
+          malos.push( `${ nombre } tiene un alt que no describe nada: «${ alt }»` );
         }
 
         if ( ! img.complete || ! img.naturalWidth ) {
-          malos.push( `${ img.currentSrc.split( '/' ).pop() } no cargó` );
+          malos.push( `${ nombre } no cargó` );
           continue;
         }
 
@@ -32,12 +46,12 @@ const fallos = await enLaPagina(
         const propia = img.naturalWidth / img.naturalHeight;
         const puesta = caja.width / caja.height;
         if ( Math.abs( propia - puesta ) / propia > 0.02 ) {
-          malos.push( `${ img.currentSrc.split( '/' ).pop() } está deformada: nació ${ propia.toFixed( 2 ) } y se muestra ${ puesta.toFixed( 2 ) }` );
+          malos.push( `${ nombre } está deformada: nació ${ propia.toFixed( 2 ) } y se muestra ${ puesta.toFixed( 2 ) }` );
         }
       }
       return [ ...new Set( malos ) ];
-    } )
-  , { anchos: ANCHOS }
+    } );
+  }, { anchos: ANCHOS }
 );
 
 informar( 'imagenes', fallos );
