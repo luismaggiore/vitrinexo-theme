@@ -276,6 +276,13 @@
 .vx-bloque { margin-top: var(--space-12); scroll-margin-top: var(--space-6); }
 .vx-bloque-cuerpo { margin-top: var(--space-4); }
 
+.vx-valor {
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  border-top: 1px dashed var(--color-border);
+}
+.vx-valor .vx-h3 { margin: 0; }
+
 .vx-pendiente {
   display: flex;
   flex-wrap: wrap;

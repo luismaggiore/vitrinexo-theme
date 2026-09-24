@@ -16,8 +16,8 @@ function vx_marca_portada(): void {
     $definidos = count( array_filter( $criterios, fn( $c ) => $c['estado'] === 'definido' ) );
     ?>
     <header class="vx-portada">
-        <p class="vx-sobretitulo">Manual de marca</p>
-        <h1 class="vx-display">Vitrinexo</h1>
+        <p class="vx-sobretitulo">Vitrinexo · Manual de marca</p>
+        <h1 class="vx-display"><?php echo esc_html( function_exists( 'vx_tagline' ) ? vx_tagline() : '' ); ?></h1>
         <p class="vx-bajada">
             Directorio B2B de empresas de servicios profesionales. Este documento dice cómo se ve,
             cómo habla y por qué existe la marca, para que alguien que nunca habló con nosotros
@@ -76,6 +76,20 @@ function vx_marca_kses(): array {
         'strong' => [], 'em' => [], 'code' => [], 'br' => [],
         'a' => [ 'href' => [], 'rel' => [], 'target' => [] ],
     ];
+}
+
+/**
+ * Una palabra y lo que trae puesto. Sirve para un valor y para un público: los
+ * dos son una palabra que no significa nada hasta que dice qué cambia por
+ * tenerla.
+ */
+function vx_marca_valor( string $palabra, string $consecuencia ): void {
+    ?>
+    <div class="vx-valor">
+        <p class="vx-h3"><?php echo esc_html( $palabra ); ?></p>
+        <p class="vx-p"><?php echo wp_kses( $consecuencia, vx_marca_kses() ); ?></p>
+    </div>
+    <?php
 }
 
 /**

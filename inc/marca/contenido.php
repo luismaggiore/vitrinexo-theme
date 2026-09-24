@@ -15,47 +15,79 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function vx_marca_estrategia(): void {
 
     vx_marca_bloque( 'estrategia-contexto', function () {
-        vx_marca_pendiente( 'En qué mercado compite Vitrinexo, contra qué alternativa concreta y qué problema resuelve que esa alternativa no resuelva. Lo decide el dueño de la marca.' );
+        vx_marca_p( 'El mercado es el networking B2B de servicios profesionales, y la competencia no es otra plataforma: es la agenda. Asociaciones gremiales, diplomados, conferencias y cafés que no se concretan.' );
+        vx_marca_p( 'Ese formato falla de tres maneras. <strong>Cuesta caro y no se puede medir</strong>: membresías, entradas y viajes contra una pila de tarjetas. <strong>Penaliza a quien no es extrovertido</strong>, porque premia al que sabe circular una sala y no al que hace bien el trabajo. Y <strong>LinkedIn dejó de convertir</strong>, porque nadie abre el mensaje de un desconocido sabiendo que le van a vender algo.' );
+        vx_marca_p( 'Vitrinexo no compite por ser una sala mejor: cambia el contexto. Acá todos entraron para hacer negocios, así que ofrecer lo que haces no necesita disculpa ni rodeo.' );
+        vx_marca_declaracion( 'No es una red social, no es un marketplace: es un directorio verificado.' );
+        vx_marca_p( 'La distinción importa porque define qué no se construye. Sin feed, porque no hay contenido que seguir. Sin transacciones, porque el contacto es directo y la plataforma no se mete en el medio.' );
     } );
 
     vx_marca_bloque( 'estrategia-que-significa-la-marca', function () {
-        vx_marca_pendiente( 'El nombre desarmado: qué carga «vitrina» y qué carga «nexo», y cuál de las dos manda cuando hay que elegir.' );
+        vx_marca_p( 'El nombre son dos palabras y las dos mitades hacen falta.' );
+        vx_marca_declaracion( 'Vitrina' );
+        vx_marca_p( 'Mostrar sin pedir permiso. Una vitrina no interrumpe a nadie: está puesta, y quien necesita lo que hay adentro entra. Es lo contrario del mensaje frío. Dentro del producto, <strong>tu vitrina es tu perfil</strong>: qué haces, qué buscas y cómo te contactan.' );
+        vx_marca_declaracion( 'Nexo' );
+        vx_marca_p( 'Lo que convierte esa vitrina en negocio. Una vitrina sola es un catálogo. Dentro del producto, <strong>un nexo es una conexión de negocio</strong> generada en la plataforma, y el contacto va directo, sin intermediario que cobre por presentarlos.' );
+        vx_marca_p( 'De ahí sale el verbo propio de la marca: <strong>vitrinear</strong>, recorrer el directorio mirando quién hace qué. Se usa en segunda persona y en imperativo, como en «vitrinea el directorio» o «empieza a vitrinear». Nunca en tercera persona ni convertido en sustantivo.' );
     } );
 
     vx_marca_bloque( 'estrategia-tagline', function () {
-        vx_marca_p( 'El sitio usa hoy <strong>«Conecta, colabora y crece»</strong> como bajada de la descripción, pero no está declarado como tagline en ninguna parte del código: se escribe a mano donde hace falta.' );
-        vx_marca_pendiente( 'Si esa es la frase, se declara en un solo lugar del sistema y todo la lee de ahí. Si no lo es, hay que elegirla.' );
+        vx_marca_declaracion( 'Tu vitrina para construir nexos de negocio.' );
+        vx_marca_p( 'Se escribe entera y con punto final. Las dos mitades del nombre aparecen en ella en el mismo orden en que se leen, y por eso no se abrevia ni se parte en dos líneas por diseño.' );
+        vx_marca_p( 'Vive declarado una sola vez, en <code>vx_tagline()</code>, y el titular de este manual sale de ahí: lo que estás leyendo arriba es el mismo texto que usaría cualquier plantilla.' );
+        vx_marca_pendiente( 'La portada del sitio todavía lo escribe a mano, y vive en el plugin. Falta que lo lea de la misma función.' );
     } );
 
     vx_marca_bloque( 'estrategia-linea-de-producto', function () {
-        vx_marca_p( 'Bajo la marca conviven hoy el directorio, las comunidades <strong>LGBTQ+</strong>, <strong>Woman</strong> y <strong>Senior</strong>, y <strong>Vitrinexo 4Dinner</strong>, las cenas de networking.' );
-        vx_marca_pendiente( 'Cómo se nombra cada pieza respecto de la marca madre: si son productos con nombre propio, secciones del directorio o comunidades. De eso depende si «4Dinner» se escribe solo o siempre pegado a Vitrinexo.' );
+        vx_marca_p( 'Una plataforma y cinco piezas. <strong>Todas se nombran con la marca madre adelante</strong>, sin excepción y también en conversación: se escribe «Vitrinexo 4Dinner», nunca «4Dinner» a secas.' );
+        vx_marca_p( '<strong>Vitrinexo</strong> es el directorio B2B completo, y es el producto. Todo lo demás vive adentro.' );
+        vx_marca_p( '<strong>Vitrinexo LGBTQ+</strong>, <strong>Vitrinexo Woman</strong> y <strong>Vitrinexo Senior</strong> son comunidades verticales, no productos aparte: mismo directorio, afinidad distinta. Un miembro puede estar en varias.' );
+        vx_marca_p( '<strong>Vitrinexo 4Dinner</strong> es la experiencia presencial: cuatro personas, una mesa, los miércoles a las 8 de la tarde, hora local de cada ciudad.' );
     } );
 
     vx_marca_bloque( 'estrategia-mision', function () {
-        vx_marca_pendiente( 'Qué hace Vitrinexo hoy, en una frase que no prometa lo que todavía no existe.' );
+        vx_marca_declaracion( 'Dar a las empresas de servicios B2B una vitrina verificada donde mostrar lo que hacen y encontrar con quién hacerlo, sin publicidad y sin intermediarios que cobren por el contacto.' );
+        vx_marca_p( 'Es lo que el producto hace hoy, no lo que va a hacer. Cada palabra tiene su contraparte en el sistema: verificada porque ningún perfil se activa solo, sin publicidad porque no hay espacio que se venda, sin intermediarios porque el contacto sale del perfil y la plataforma no lo toca.' );
     } );
 
     vx_marca_bloque( 'estrategia-vision', function () {
-        vx_marca_pendiente( 'A dónde va. El alcance es global: habla hispana, Brasil, Estados Unidos y Europa. La visión tiene que decirlo sin sonar a folleto.' );
+        vx_marca_declaracion( 'Ser el primer lugar donde una empresa de servicios busca cuando necesita un aliado.' );
+        vx_marca_p( '<strong>El lanzamiento es en Hispanoamérica y en español.</strong> La visión no se queda ahí: incluye el mundo hispanohablante completo, Brasil, Estados Unidos y Europa. Esa diferencia se sostiene al escribir, y en los dos sentidos: no se promete presencia donde todavía no la hay, y no se dice que Vitrinexo sea una plataforma latinoamericana.' );
     } );
 
     vx_marca_bloque( 'estrategia-valores', function () {
-        vx_marca_pendiente( 'Cuatro o cinco, cada uno con su consecuencia práctica: qué se hace distinto por tenerlo. Un valor sin consecuencia es un adjetivo.' );
+        vx_marca_p( 'Cinco, y cada uno con su consecuencia práctica. Un valor sin consecuencia es un adjetivo.' );
+        foreach ( [
+            [ 'Rigor', 'Ningún registro se activa solo. Ni con correo corporativo, ni por volumen, ni para acelerar una campaña. Crecer más lento es el precio, y está aceptado.' ],
+            [ 'Franqueza', 'Acá se viene a vender y el copy no lo disfraza. Nada de «conversemos sin compromiso». Tampoco se promete lo que no se puede garantizar: el resultado de negocio depende de la propuesta, del mercado y del momento, y eso se dice.' ],
+            [ 'Reciprocidad', 'Para ver un directorio verificado te dejas verificar. El perfil obliga a declarar las dos caras, lo que ofreces y lo que buscas, porque quien solo mira no alimenta el directorio.' ],
+            [ 'Paridad', 'Entre pares. No hay posiciones destacadas pagadas ni publicidad, y el orden del directorio no se vende. El tamaño de la empresa no cambia su lugar.' ],
+            [ 'Sobriedad', 'La plataforma no pide atención diaria. No hay feed, ni racha, ni contenido que publicar para seguir existiendo. Tu vitrina trabaja sin ti, y cualquier función que exija presencia constante contradice esto.' ],
+        ] as [ $palabra, $consecuencia ] ) {
+            vx_marca_valor( $palabra, $consecuencia );
+        }
     } );
 
     vx_marca_bloque( 'estrategia-publicos-objetivos', function () {
-        vx_marca_p( 'El producto ya distingue miembros por empresa, cargo, industria y país, y separa tres comunidades. Eso es segmentación del sistema, no públicos de la marca.' );
-        vx_marca_pendiente( 'A quién le habla la marca, en las palabras de esa persona y no en las nuestras, y a quién deja fuera cada público.' );
+        vx_marca_p( 'Tres, y el primero y el segundo suelen ser la misma persona en momentos distintos.' );
+        vx_marca_valor( 'La empresa de servicios B2B en expansión', 'Dice «hago bien lo mío y necesito que lo sepan donde no tengo contactos». No dice «quiero hacer networking». El tamaño no la define: una consultora de tres personas y una de trescientas entran por la misma puerta.' );
+        vx_marca_valor( 'El mismo miembro buscando proveedor', 'El que hoy pide recomendaciones por WhatsApp porque no le cree a un buscador. Llega con una necesidad concreta y poco tiempo.' );
+        vx_marca_valor( 'Las comunidades verticales', 'Entran por afinidad, con LGBTQ+, Woman o Senior, y se quedan por el directorio. La afinidad abre la puerta; lo que retiene es el negocio.' );
+        vx_marca_p( 'Deja fuera, y conviene decirlo: quien vende a consumidor final, quien busca empleo y quien quiere una audiencia para publicar contenido.' );
     } );
 
     vx_marca_bloque( 'estrategia-objetivos-estrategicos', function () {
-        vx_marca_p( 'El único número que el sistema hace cumplir hoy es el del programa de lanzamiento: los <strong>primeros 100 miembros aprobados</strong> reciben el distintivo de Miembro Pionero, y la membresía vence a los <strong>90 días</strong> de la aprobación.' );
-        vx_marca_pendiente( 'Los objetivos del negocio, con número y plazo cuando lo haya.' );
+        vx_marca_p( 'Uno manda sobre todos los demás, y tiene fecha.' );
+        vx_marca_declaracion( '100 miembros aprobados antes de que termine 2026, para empezar a cobrar en 2027.' );
+        vx_marca_p( 'De ahí sale el programa de lanzamiento entero, y por eso el sistema lo hace cumplir en vez de confiarlo al copy: los <strong>primeros 100 miembros aprobados</strong> reciben el distintivo de Miembro Pionero, que es permanente, y la membresía vence a los <strong>90 días</strong> de la aprobación.' );
+        vx_marca_p( 'La consecuencia al escribir es que el programa no se anuncia como una promoción sino como una fecha de corte. Cuando se llegue a 100, cierra.' );
+        vx_marca_pendiente( 'El modelo de suscripción de 2027 no está definido, y el sitio ya promete que los Miembros Pioneros tendrán condiciones preferenciales. Esa promesa hay que poder cumplirla.' );
     } );
 
     vx_marca_bloque( 'estrategia-propuesta-de-valor', function () {
-        vx_marca_pendiente( 'Qué promete Vitrinexo y a cambio de qué. Hoy el sitio lo cuenta por secciones (el problema, cómo funciona, para quién es), pero la promesa no está enunciada en una frase.' );
+        vx_marca_declaracion( 'Muestras lo que haces ante un directorio de empresas verificadas, y a cambio te dejas verificar.' );
+        vx_marca_p( 'Ese es todo el trato, y por eso la verificación no es un trámite de entrada: es el producto. Lo que se promete es visibilidad ante empresas reales que están ahí para hacer negocios. Lo que no se promete es el negocio.' );
+        vx_marca_p( 'Lo que se paga no es el contacto ni la comisión, sino estar en el directorio. Cualquier cobro por conectar a dos miembros rompe la propuesta.' );
     } );
 }
 
@@ -64,16 +96,18 @@ function vx_marca_estrategia(): void {
 function vx_marca_identidad(): void {
 
     vx_marca_bloque( 'identidad-logotipo', function () {
-        vx_marca_p( 'El logotipo es un archivo vectorial, <code>assets/img/vitrinexo.svg</code>, de proporción <strong>1400 × 502</strong>. Se usa siempre ese archivo: ninguna pantalla lo vuelve a dibujar, ni con texto ni con formas.' );
+        vx_marca_p( 'El logotipo es un archivo vectorial, <code>assets/img/vitrinexo.svg</code>, de proporción <strong>1400 × 502</strong>. Se usa siempre ese archivo: ninguna pantalla lo vuelve a dibujar, ni con tipografía ni con formas.' );
         ?>
         <div class="vx-logo-caja">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>"
-                 alt="Logotipo de Vitrinexo: la palabra Vitrinexo en navy con el símbolo en degradado verde."
+                 alt="Logotipo de Vitrinexo: la palabra Vitrinexo en navy, con el símbolo de la vitrina en degradado verde."
                  class="vx-logo" data-logotipo="1">
         </div>
         <?php
-        vx_marca_p( 'El archivo trae dos colores que <strong>no están en la paleta del producto</strong>: un navy <code>#2F365B</code> y un degradado verde de <code>#62FA7C</code> a <code>#34998D</code>. El color de marca de la interfaz es el teal <code>#00AEB8</code>. Hoy la identidad está partida en dos.' ); // color ajeno: son los del archivo del logotipo, que es justo lo que este párrafo denuncia.
-        vx_marca_pendiente( 'Cuál manda. Si manda el logotipo, la paleta de la interfaz tiene que acercarse al verde; si manda la interfaz, el logotipo se redibuja en teal. También falta el área de respeto y el tamaño mínimo medido.' );
+        vx_marca_p( 'La marca se resuelve como palabra con un símbolo dentro: la vitrina ocupa el lugar de la primera letra, y esa es la decisión, no un adorno. El símbolo no se separa de la palabra para usarlo suelto.' );
+        vx_marca_p( '<strong>El logotipo tiene sus propios colores y no salen de la paleta de la interfaz.</strong> Trae un navy <code>#2F365B</code> y un degradado verde de <code>#62FA7C</code> a <code>#34998D</code>, mientras el color de acción del producto es el teal <code>--color-primary</code>. Los dos mundos conviven a propósito: el logotipo firma, la interfaz opera. Nadie repinta el logotipo en teal para que combine.' ); // color ajeno: son los del archivo del logotipo, que es lo que este párrafo documenta.
+        vx_marca_p( 'Va sobre fondo claro. Sobre fondo oscuro o sobre foto no hay versión aprobada, así que en esos casos se pone sobre una superficie clara antes que inventarle un tratamiento.' );
+        vx_marca_pendiente( 'Falta el área de respeto y el tamaño mínimo, los dos medidos. Propuesta a aprobar: respeto igual a la altura de la vitrina del símbolo por cada lado, y mínimo de 140 px de ancho en pantalla, que es donde la palabra deja de leerse cómodo.' );
     } );
 
     vx_marca_bloque( 'identidad-isotipo', function () {
@@ -182,13 +216,18 @@ function vx_marca_identidad(): void {
 function vx_marca_voz(): void {
 
     vx_marca_bloque( 'voz-idioma', function () {
-        vx_marca_p( '<strong>Español de Chile</strong>, y se trata de tú. Nunca voseo: «tienes» y «puedes», no «tenés» ni «podés».' );
-        vx_marca_p( 'El alcance de la marca es global: habla hispana, Brasil, Estados Unidos y Europa. Ningún texto restringe geográficamente el producto ni lo llama latinoamericano.' );
-        vx_marca_pendiente( 'Qué pasa con el portugués y el inglés cuando entren Brasil y Estados Unidos: si es el mismo texto traducido o se escribe aparte.' );
+        vx_marca_p( '<strong>Español, y se trata de tú.</strong> Nunca voseo: «tienes» y «puedes», no «tenés» ni «podés».' );
+        vx_marca_p( 'El lanzamiento y la comunidad inicial son de Hispanoamérica, así que el español es el de la región y no el peninsular. La visión incluye Brasil, Estados Unidos y Europa, y eso obliga a una regla al escribir: <strong>no se dice que Vitrinexo sea una plataforma latinoamericana</strong>, aunque hoy sus miembros lo sean. Lo que se dice es dónde hay comunidad hoy.' );
+        vx_marca_pendiente( 'Portugués e inglés no existen todavía. Cuando entren, hay que decidir si son el mismo texto traducido o se escriben aparte, y qué pasa con «vitrinear», que no se traduce.' );
     } );
 
     vx_marca_bloque( 'voz-tono', function () {
-        vx_marca_pendiente( 'Cómo suena la marca con cada público, con ejemplos y con lo que nunca se dice. Depende de los públicos, que todavía no están escritos.' );
+        vx_marca_declaracion( 'Directo y sin adorno, porque el interlocutor está trabajando.' );
+        vx_marca_p( 'Vitrinexo le habla a alguien que dirige una empresa y tiene poco tiempo. Frase corta, dato adelante, y la conclusión antes que el argumento. Si un párrafo se puede leer en diagonal y aun así se entiende, está bien escrito.' );
+        vx_marca_valor( 'Con quien todavía no es miembro', 'Se nombra el problema con sus palabras antes de ofrecer nada: «mucho evento, poco nexo». No se promete resultado de negocio, porque no depende de nosotros. Se promete visibilidad ante empresas verificadas, que sí.' );
+        vx_marca_valor( 'Con el miembro', 'Se le habla como a un par, no como a un usuario al que hay que activar. Nada de urgencia inventada ni de rachas. Si no hay novedad, no se escribe.' );
+        vx_marca_valor( 'Frente a una objeción', 'Se le da la razón en lo que la tiene y después se responde. «Nadie puede garantizar resultados de negocio» va antes que lo que sí se garantiza. Una objeción respondida a la defensiva confirma la sospecha.' );
+        vx_marca_p( 'Lo que nunca se dice: que Vitrinexo es una red social, que hay que estar activo para que funcione, ni una cifra de comunidad que no se pueda sostener. Tampoco se pide disculpas por vender.' );
     } );
 
     vx_marca_bloque( 'voz-mayusculas-y-minusculas', function () {

@@ -123,6 +123,17 @@ add_filter( 'document_title_parts', function ( array $title ): array {
     return $title;
 } );
 
+// ─── La marca, en un solo lugar ────────────────────────────────────────────────
+
+/**
+ * El tagline oficial. Vive acá y no escrito a mano en cada plantilla: una
+ * frase que se copia y se pega se desincroniza en la tercera copia, y la
+ * tercera copia es siempre la que ve el cliente.
+ */
+function vx_tagline(): string {
+    return 'Tu vitrina para construir nexos de negocio.';
+}
+
 // ─── Manual de marca ───────────────────────────────────────────────────────────
 // La ruta /marca, su hoja y su regla de reescritura. Vive aparte porque es un
 // documento que se genera del sistema de diseño, no una página del sitio.
