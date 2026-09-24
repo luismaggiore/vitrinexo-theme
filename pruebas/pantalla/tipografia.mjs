@@ -13,7 +13,8 @@
  */
 
 import { informar, resolver, tokensDelSistema } from '../comun.mjs';
-import { enLaPagina } from '../comun-pantalla.mjs';
+import { chromium } from 'playwright';
+import { BASE, enLaPagina } from '../comun-pantalla.mjs';
 
 /**
  * En pantalla angosta los dos titulares bajan un peldaño. No es otra escala:
@@ -69,5 +70,37 @@ const fallos = await enLaPagina( async ( pagina, ancho ) =>
   }, esperadoEn( ancho ) ),
   { anchos: [ 390, 1200 ] }
 );
+
+/**
+ * Y ningún titular grande del sitio se queda sin peldaño.
+ *
+ * Al borrar la regla general de h1 y h2, todo título que dependía solo de ella
+ * se quedó en cero de tracking. Uno lo hizo, y solo se vio abriendo la página:
+ * el titular de preguntas frecuentes, que se estilaba en el atributo style.
+ */
+const RUTAS = [ '/', '/preguntas-frecuentes/', '/login/', '/privacidad/', '/terminos/' ];
+const origen = new URL( BASE() ).origin;
+const navegador = await chromium.launch();
+const pagina = await navegador.newPage( { viewport: { width: 1280, height: 900 } } );
+
+for ( const ruta of RUTAS ) {
+  const r = await pagina.goto( origen + ruta, { waitUntil: 'domcontentloaded' } ).catch( () => null );
+  if ( ! r || ! r.ok() ) continue;
+
+  const sueltos = await pagina.evaluate( () => {
+    const malos = [];
+    for ( const el of document.querySelectorAll( 'h1, h2, h3' ) ) {
+      const s = getComputedStyle( el );
+      const px = parseFloat( s.fontSize );
+      const ls = s.letterSpacing === 'normal' ? 0 : parseFloat( s.letterSpacing );
+      const texto = ( el.textContent || '' ).trim().slice( 0, 30 );
+      if ( px >= 22 && ls === 0 && texto ) malos.push( `${ el.tagName } de ${ px }px sin tracking: «${ texto }»` );
+    }
+    return [ ...new Set( malos ) ];
+  } );
+  for ( const s of sueltos ) fallos.push( `${ ruta } tiene un ${ s }` );
+}
+
+await navegador.close();
 
 informar( 'tipografia', fallos );
