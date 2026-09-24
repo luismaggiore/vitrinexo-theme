@@ -1,0 +1,431 @@
+/*
+ * El manual de marca.
+ *
+ * Todo lo de acá nombra papeles, nunca primitivos: es la primera regla que el
+ * manual enuncia y este archivo es donde se comprueba. Si alguien escribe un
+ * #hexadecimal o un --color-cyan-600 acá, la prueba de tokens lo caza.
+ *
+ * El contorno de foco está siempre puesto, transparente cuando no toca, para
+ * que ningún estado cambie el tamaño de nada: si el foco agregara borde, la
+ * fila se correría al tabular.
+ */
+
+.vx-marca {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  /* Nunca se parten palabras al final de la línea. */
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}
+
+.vx-marca *:focus-visible {
+  outline: 2px solid var(--color-primary-ink);
+  outline-offset: 2px;
+}
+
+.vx-solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.vx-saltar {
+  position: absolute;
+  left: var(--space-4);
+  top: calc(var(--space-2) * -10);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-primary-ink);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top .15s ease;
+}
+.vx-saltar:focus { top: var(--space-2); }
+
+/* ── El menú ──────────────────────────────────────────────────────────── */
+
+.vx-menu {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 30;
+  width: 288px;
+  overflow-y: auto;
+  padding: var(--space-6) var(--space-4) var(--space-12);
+  border-right: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.vx-menu-logo {
+  display: block;
+  min-height: 44px;
+  padding: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+.vx-menu-logo img { display: block; width: 156px; height: auto; }
+
+.vx-menu-parte {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-6) 0 var(--space-2);
+}
+/* El enlace de la parte alcanza los 44 de alto igual que los criterios: era el
+   único control del menú que no llegaba, por ser tres líneas de 26. */
+.vx-menu-parte a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.vx-menu-lista { margin: 0; padding: 0; list-style: none; }
+
+.vx-menu-lista a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-body-s);
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+/*
+ * Dónde estás no se marca solo con color: el color solo no llega al 3:1 que la
+ * norma pide para lo que no es texto. Va con contorno, y el contorno ocupa el
+ * mismo lugar siempre para que marcar no corra la fila.
+ */
+.vx-menu-lista a[aria-current="true"] {
+  border-color: var(--color-primary-ink);
+  background: var(--color-primary-soft);
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+@media (hover: hover) {
+  .vx-menu-lista a:hover { background: var(--color-surface-muted); color: var(--color-text-primary); }
+  .vx-menu-parte a:hover { color: var(--color-primary-ink); }
+}
+
+/* El estado de cada criterio: un punto, con su palabra para quien no ve el punto. */
+.vx-punto {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--color-text-secondary);
+  border-radius: var(--radius-pill);
+}
+.vx-punto-definido  { background: var(--color-success); border-color: var(--color-success); }
+.vx-punto-parcial   { background: var(--color-warning); border-color: var(--color-warning); }
+.vx-punto-pendiente { background: transparent; }
+
+/* ── La barra de pantalla angosta ─────────────────────────────────────── */
+
+.vx-barra {
+  display: none;
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 35;
+  align-items: center;
+  gap: var(--space-3);
+  height: 56px;
+  padding: 0 var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.vx-barra-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text-primary);
+  font-size: var(--fs-h4);
+  cursor: pointer;
+}
+.vx-barra-titulo {
+  font-size: var(--fs-body-s);
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.vx-velo {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  background: var(--color-text-primary);
+  opacity: .4;
+}
+
+/* ── El documento ─────────────────────────────────────────────────────── */
+
+.vx-doc { margin-left: 288px; }
+
+.vx-columna {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6) var(--space-20);
+}
+
+.vx-portada { padding-bottom: var(--space-12); border-bottom: 1px solid var(--color-border); }
+
+.vx-sobretitulo {
+  margin: 0;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.vx-display {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+}
+
+.vx-h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+}
+
+.vx-h3 {
+  margin: var(--space-5) 0 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.vx-h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-primary-ink);
+}
+
+.vx-bajada {
+  margin: var(--space-5) 0 0;
+  font-size: var(--fs-body-l);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.vx-p {
+  margin: var(--space-4) 0 0;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+.vx-p code, .vx-dato {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: var(--fs-body-s);
+}
+.vx-p code { color: var(--color-text-secondary); }
+
+.vx-nota {
+  margin: var(--space-3) 0 0;
+  font-size: var(--fs-body-s);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.vx-parte { padding: var(--space-16) 0 var(--space-12); border-bottom: 1px solid var(--color-border); scroll-margin-top: var(--space-6); }
+.vx-parte-cabeza { display: flex; align-items: baseline; gap: var(--space-3); }
+.vx-numero { color: var(--color-primary-ink); font-size: var(--fs-body-s); }
+
+.vx-bloque { margin-top: var(--space-12); scroll-margin-top: var(--space-6); }
+.vx-bloque-cuerpo { margin-top: var(--space-4); }
+
+.vx-pendiente {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: baseline;
+  margin: var(--space-4) 0 0;
+  padding: var(--space-4);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+  font-size: var(--fs-body-s);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.vx-estado {
+  flex: 0 0 auto;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-warning-bg);
+  color: var(--color-text-primary);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+}
+
+/* ── La paleta ────────────────────────────────────────────────────────── */
+
+.vx-rampa { margin-top: var(--space-6); }
+.vx-rampa-nombre { margin: 0 0 var(--space-2); font-size: var(--fs-body-s); font-weight: 600; }
+.vx-rampa-pasos { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+.vx-peldano { display: flex; flex-direction: column; gap: 2px; width: 72px; }
+.vx-peldano .vx-dato { font-size: var(--fs-caption); line-height: 1.3; color: var(--color-text-secondary); }
+.vx-muestra {
+  display: block;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+.vx-tenue { color: var(--color-text-secondary); }
+
+.vx-familia { margin-top: var(--space-8); }
+.vx-familia-nombre { margin: 0; font-size: var(--fs-body); font-weight: 600; }
+
+.vx-papeles { margin-top: var(--space-4); display: flex; flex-direction: column; gap: var(--space-1); }
+
+/*
+ * Rejilla de pistas fijas y no flex: con flex basta un oficio más largo que
+ * los demás para correr la columna siguiente en esa sola fila, y en una tabla
+ * de colores la alineación es lo que deja comparar de un vistazo.
+ */
+.vx-papel {
+  display: grid;
+  grid-template-columns: 36px 200px 84px 52px 1fr;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.vx-papel-muestra {
+  height: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+.vx-papel-sin-muestra { border-style: dashed; }
+.vx-papel .vx-dato { font-size: var(--fs-caption); overflow-wrap: anywhere; }
+.vx-papel-oficio { font-size: var(--fs-body-s); line-height: 1.5; color: var(--color-text-secondary); }
+
+.vx-celdas { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-5); }
+.vx-celda { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); }
+.vx-celda-muestra {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-body);
+  font-weight: 700;
+}
+/*
+ * El número que pasa no lleva color: --color-success da 2,70:1 sobre el fondo
+ * y no llega al mínimo, y un número que anuncia contraste no puede ser el que
+ * falla. El que no pasa se marca con el aspa además del color, para que no
+ * dependa de distinguirlo.
+ */
+.vx-pasa { color: var(--color-text-secondary); }
+.vx-falla { color: var(--color-accent-active); font-weight: 700; }
+
+/* ── La escala tipográfica ────────────────────────────────────────────── */
+
+.vx-nivel { padding: var(--space-5) 0; border-bottom: 1px solid var(--color-border); }
+.vx-nivel-cabeza { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: baseline; }
+.vx-nivel-uso { font-size: var(--fs-body-s); font-weight: 600; }
+.vx-nivel-muestra {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+/* ── El logotipo ──────────────────────────────────────────────────────── */
+
+.vx-logo-caja {
+  margin-top: var(--space-5);
+  padding: var(--space-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+.vx-logo { display: block; width: min(320px, 100%); height: auto; }
+
+/* ── El vocabulario ───────────────────────────────────────────────────── */
+
+.vx-vocabulario { margin-top: var(--space-5); }
+.vx-vocabulario-cabeza,
+.vx-vocabulario-fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.vx-vocabulario-fila { font-size: var(--fs-body-s); line-height: 1.5; }
+.vx-si { font-weight: 600; color: var(--color-text-primary); }
+.vx-no { color: var(--color-text-secondary); text-decoration: line-through; }
+
+/* ── Angosto ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .vx-barra { display: flex; }
+  .vx-doc { margin-left: 0; padding-top: 56px; }
+  .vx-columna { padding: var(--space-10) var(--space-4) var(--space-16); }
+
+  .vx-menu {
+    width: min(320px, 86vw);
+    transform: translateX(-100%);
+    transition: transform .2s ease;
+  }
+  .vx-marca.vx-menu-abierto .vx-menu { transform: none; }
+
+  .vx-papel { grid-template-columns: 36px 1fr 84px 52px; }
+  /* En angosto el oficio baja de línea y se alinea bajo el nombre, en vez de
+     estrujarse en una columna de cuatro palabras. */
+  .vx-papel-oficio { grid-column: 2 / -1; }
+
+  .vx-display { font-size: var(--fs-h2); }
+  .vx-h2 { font-size: var(--fs-h3); }
+}
+
+@media (min-width: 901px) {
+  .vx-velo { display: none; }
+}

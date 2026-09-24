@@ -1,6 +1,6 @@
-﻿@import url("switzer.css");
+@import url("switzer.css");
 :root {
-  /* Brand / Green */
+  /* Verde */
   --color-green-50: #eaf7f1;
   --color-green-100: #d5efdf;
   --color-green-200: #abe0c5;
@@ -12,6 +12,7 @@
   --color-green-800: #1d6a44;
   --color-green-900: #165335;
 
+  /* Teal */
   --color-cyan-50: #eafbfc;
   --color-cyan-100: #d5f5f7;
   --color-cyan-200: #abecf0;
@@ -23,7 +24,7 @@
   --color-cyan-800: #1b8186;
   --color-cyan-900: #156467;
 
-  /* Purple */
+  /* Púrpura */
   --color-purple-50: #eee6ff;
   --color-purple-100: #dcccff;
   --color-purple-200: #b999ff;
@@ -35,7 +36,7 @@
   --color-purple-800: #32009e;
   --color-purple-900: #27007a;
 
-  /* pink */
+  /* Rosa */
   --color-pink-50: #ffedf3;
   --color-pink-100: #ffdbe7;
   --color-pink-200: #ffb8cf;
@@ -47,7 +48,7 @@
   --color-pink-800: #9e2f51;
   --color-pink-900: #7a253f;
 
-  /* Ice / Neutral */
+  /* Hielo */
   --color-ice-50: #fefeff;
   --color-ice-100: #fcfeff;
   --color-ice-200: #f8fbfe;
@@ -59,22 +60,25 @@
   --color-ice-800: #93989c;
   --color-ice-900: #72767a;
 
-  /* Text */
+  /* Tintas */
   --color-text-primary: #3d444e;
   --color-text-secondary: #5e6b7a;
   --color-text-inverse: #ffffff;
 
-  /* Surfaces */
+  /* Superficies */
   --color-background: var(--color-ice-300);
   --color-surface: #fafcff;
   --color-surface-muted: var(--color-ice-100);
   --color-border: #d7e4ef;
 
-  /* Semantic */
+  /* Marca, apoyo y estados */
   --color-primary: var(--color-cyan-600);
   --color-primary-hover: var(--color-cyan-700);
   --color-primary-active: var(--color-cyan-800);
   --color-primary-soft: var(--color-cyan-50);
+  /* El teal cuando tiene que leerse. #00aeb8 da 2,64:1 y cyan-800 se queda en 4,37 sobre
+     el fondo de página; cyan-900 pasa en las tres superficies, con 6,48 en el peor caso. */
+  --color-primary-ink: var(--color-cyan-900);
 
   --color-secondary: var(--color-purple-500);
   --color-secondary-hover: var(--color-purple-600);
@@ -93,18 +97,41 @@
   --color-warning: var(--color-pink-500);
   --color-warning-bg: var(--color-pink-50);
 
-  /* Shadows */
+  /* Relieve */
   --shadow-sm: 0 2px 8px rgba(20, 32, 51, 0.08);
   --shadow-md: 0 8px 24px rgba(20, 32, 51, 0.12);
   --shadow-lg: 0 16px 48px rgba(20, 32, 51, 0.16);
 
-  /* Radius */
+  /* Forma */
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 24px;
   --radius-pill: 999px;
 
-  /* Typography */
+  /* Escala tipográfica */
+  --fs-display: 40px;
+  --fs-h2: 32px;
+  --fs-h3: 24px;
+  --fs-h4: 20px;
+  --fs-body-l: 18px;
+  --fs-body: 16px;
+  --fs-body-s: 14px;
+  --fs-caption: 12px;
+
+  /* Espaciado */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Tipografía */
   --font-display: "Switzer", -apple-system, sans-serif;
   --font-body: "Switzer", -apple-system, sans-serif;
 }

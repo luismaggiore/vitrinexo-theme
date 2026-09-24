@@ -123,6 +123,12 @@ add_filter( 'document_title_parts', function ( array $title ): array {
     return $title;
 } );
 
+// ─── Manual de marca ───────────────────────────────────────────────────────────
+// La ruta /marca, su hoja y su regla de reescritura. Vive aparte porque es un
+// documento que se genera del sistema de diseño, no una página del sitio.
+
+require_once get_template_directory() . '/inc/marca/ruta.php';
+
 // ─── Template loader por slug de página ────────────────────────────────────────
 
 add_filter( 'template_include', function ( string $template ): string {
@@ -169,6 +175,7 @@ add_filter( 'template_include', function ( string $template ): string {
         'preguntas-frecuentes'    => 'page-faq',
         'mis-publicaciones'       => 'page-mis-publicaciones',
         'blog'                    => 'page-blog',
+        'marca'                   => 'page-marca',
         'recuperar-contrasena'    => 'page-recuperar-contrasena',
         'nueva-contrasena'        => 'page-nueva-contrasena',
     ];

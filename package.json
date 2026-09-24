@@ -1,0 +1,23 @@
+{
+  "name": "vitrinexo-theme",
+  "version": "1.0.0",
+  "description": "Tema de Vitrinexo. Las pruebas del manual de marca viven en pruebas/.",
+  "scripts": {
+    "verificar": "node pruebas/verificar.mjs",
+    "accesibilidad": "node pruebas/accesibilidad.mjs",
+    "avance": "node pruebas/avance.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luismaggiore/vitrinexo-theme.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/luismaggiore/vitrinexo-theme/issues"
+  },
+  "homepage": "https://github.com/luismaggiore/vitrinexo-theme#readme",
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  },
+  "private": true
+}

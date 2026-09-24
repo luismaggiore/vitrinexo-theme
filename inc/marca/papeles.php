@@ -1,0 +1,163 @@
+<?php
+/**
+ * Los papeles: la capa semántica, agrupada por oficio y con el oficio escrito.
+ *
+ * Sueltos y todos del mismo tamaño, cuarenta tokens parecen cuarenta colores
+ * casi iguales entre los que hay que elegir. Tres superficies se parecen
+ * porque una es la hoja, otra lo que se levanta un milímetro sobre ella y la
+ * tercera lo que se hunde: la diferencia no está en el color, está en el
+ * trabajo. Por eso va escrito al lado.
+ *
+ * Esta lista es también un contrato: una prueba comprueba que todo token
+ * semántico del CSS esté acá con su oficio, y que no haya acá ninguno que el
+ * CSS ya no declare. Un papel que nadie usa no es un papel, es un token que
+ * sobra.
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * @return array<int,array{titulo:string,bajada:string,papeles:array<string,string>}>
+ */
+function vx_marca_familias(): array {
+    return [
+        [
+            'titulo' => 'Superficies',
+            'bajada' => 'Sobre qué se apoya todo. La hoja, lo que se levanta sobre ella y lo que se hunde.',
+            'papeles' => [
+                '--color-background'     => 'La hoja. El fondo de la página completa.',
+                '--color-surface'        => 'Lo que se levanta: tarjetas, paneles, la ficha de un miembro.',
+                '--color-surface-muted'  => 'Lo que se hunde: encabezados de tabla, campos en reposo, zonas de apoyo.',
+                '--color-border'         => 'El borde de todo lo anterior. Separa sin pesar.',
+            ],
+        ],
+        [
+            'titulo' => 'Tintas',
+            'bajada' => 'Lo que se lee. Se elige por jerarquía, nunca por color.',
+            'papeles' => [
+                '--color-text-primary'   => 'El texto que hay que leer: titulares, nombres, cuerpo.',
+                '--color-text-secondary' => 'Lo que acompaña: bajadas, metadatos, ayuda de campo.',
+                '--color-text-inverse'   => 'La tinta cuando el fondo es oscuro o saturado.',
+            ],
+        ],
+        [
+            'titulo' => 'Marca',
+            'bajada' => 'El teal. Es lo que identifica a Vitrinexo y lo que mueve la acción principal.',
+            'papeles' => [
+                '--color-primary'        => 'La acción principal y los elementos que marcan territorio de marca.',
+                '--color-primary-hover'  => 'La misma acción con el puntero encima.',
+                '--color-primary-active' => 'La misma acción mientras se presiona.',
+                '--color-primary-soft'   => 'El fondo tenue que señala sin gritar: avisos, distintivos, filas activas.',
+                '--color-primary-ink'    => 'El teal cuando tiene que leerse: enlaces, títulos de acento e íconos sobre superficie clara.',
+            ],
+        ],
+        [
+            'titulo' => 'Apoyo',
+            'bajada' => 'El púrpura y el rosa. Acompañan a la marca; no compiten con ella por la acción principal.',
+            'papeles' => [
+                '--color-secondary'        => 'La acción secundaria y las piezas que necesitan distinguirse del teal.',
+                '--color-secondary-hover'  => 'La acción secundaria con el puntero encima.',
+                '--color-secondary-active' => 'La acción secundaria mientras se presiona.',
+                '--color-secondary-soft'   => 'El fondo tenue de lo secundario.',
+                '--color-accent'           => 'El realce: lo que tiene que encontrarse de un vistazo en una pantalla llena.',
+                '--color-accent-hover'     => 'El realce con el puntero encima.',
+                '--color-accent-active'    => 'El realce mientras se presiona.',
+                '--color-accent-soft'      => 'El fondo tenue del realce.',
+            ],
+        ],
+        [
+            'titulo' => 'Estados',
+            'bajada' => 'Qué pasó. Cada uno viene en par: la tinta que lo dice y el fondo sobre el que se dice.',
+            'papeles' => [
+                '--color-success'    => 'Salió bien: perfil aprobado, conexión aceptada.',
+                '--color-success-bg' => 'El fondo del aviso de que salió bien.',
+                '--color-info'       => 'Hay algo que saber, y no es una falla.',
+                '--color-info-bg'    => 'El fondo del aviso informativo.',
+                '--color-warning'    => 'Hay que mirar esto: vencimiento cerca, dato incompleto.',
+                '--color-warning-bg' => 'El fondo del aviso de atención.',
+            ],
+        ],
+        [
+            'titulo' => 'Relieve y forma',
+            'bajada' => 'Cuánto se levanta una pieza y qué tan redondeada es. Se eligen por jerarquía, igual que las tintas.',
+            'papeles' => [
+                '--shadow-sm'    => 'Apenas despegado: tarjetas en reposo.',
+                '--shadow-md'    => 'Levantado: menús desplegables, tarjetas con el puntero encima.',
+                '--shadow-lg'    => 'Flotando: diálogos y cajones.',
+                '--radius-sm'    => 'Piezas chicas: distintivos, campos, botones compactos.',
+                '--radius-md'    => 'La medida de la casa: botones y tarjetas.',
+                '--radius-lg'    => 'Piezas grandes: paneles y diálogos.',
+                '--radius-pill'  => 'Redondeado completo: filtros, etiquetas, avatares.',
+            ],
+        ],
+        [
+            'titulo' => 'Escala tipográfica',
+            'bajada' => 'Ocho peldaños y nada entre medio. Tener tamaños no es tener jerarquía: cada peldaño dice para qué sirve.',
+            'papeles' => [
+                '--fs-display' => 'El titular de portada. Uno por página.',
+                '--fs-h2'      => 'El título de una sección mayor.',
+                '--fs-h3'      => 'Una declaración: una frase que se sostiene sola.',
+                '--fs-h4'      => 'El título de un bloque dentro de una sección.',
+                '--fs-body-l'  => 'La bajada. Más grande que la prosa porque se lee antes.',
+                '--fs-body'    => 'El cuerpo: prosa, campos, tablas.',
+                '--fs-body-s'  => 'Lo secundario: notas, pies, ayuda de campo.',
+                '--fs-caption' => 'Etiquetas, distintivos y datos sueltos.',
+            ],
+        ],
+        [
+            'titulo' => 'Espaciado',
+            'bajada' => 'La escala de aire, en múltiplos de 4. Existe para que lo próximo que haga falta caiga en un peldaño en vez de inventar 33 px.',
+            'papeles' => [
+                '--space-1'  => 'Entre una etiqueta y su dato.',
+                '--space-2'  => 'Entre piezas pegadas: un ícono y su texto.',
+                '--space-3'  => 'Dentro de una pieza chica: el relleno de un distintivo.',
+                '--space-4'  => 'La medida de la casa: relleno de botón, separación entre campos.',
+                '--space-5'  => 'Entre grupos de campos.',
+                '--space-6'  => 'El relleno de una tarjeta y el aire entre párrafos.',
+                '--space-8'  => 'Entre bloques distintos de una misma sección.',
+                '--space-10' => 'Entre una sección y la siguiente, en pantalla angosta.',
+                '--space-12' => 'Entre una sección y la siguiente.',
+                '--space-16' => 'Entre bloques mayores de una página larga.',
+                '--space-20' => 'El aire de respiro de una parte completa.',
+            ],
+        ],
+        [
+            'titulo' => 'Tipografía',
+            'bajada' => 'Con qué se escribe. Una sola familia en dos papeles, para que no haya que elegir.',
+            'papeles' => [
+                '--font-display' => 'Titulares y cualquier texto que se lea antes que el resto.',
+                '--font-body'    => 'El cuerpo: prosa, campos, tablas.',
+            ],
+        ],
+    ];
+}
+
+/**
+ * Los grupos del CSS que son rampas de primitivos. Se declaran acá porque la
+ * regla «ninguna pantalla nombra un primitivo» necesita saber cuáles lo son, y
+ * deducirlo del nombre del token es deducirlo de una convención que alguien va
+ * a romper.
+ */
+function vx_marca_grupos_primitivos(): array {
+    return [ 'Verde', 'Teal', 'Púrpura', 'Rosa', 'Hielo' ];
+}
+
+/** Todos los papeles declarados, en un mapa nombre → oficio. */
+function vx_marca_oficios(): array {
+    $oficios = [];
+    foreach ( vx_marca_familias() as $f ) {
+        foreach ( $f['papeles'] as $nombre => $oficio ) $oficios[ $nombre ] = $oficio;
+    }
+    return $oficios;
+}
+
+/**
+ * Los primitivos: las rampas de color. Son la escala de donde salen los
+ * papeles, y ninguna pantalla puede nombrarlos directamente.
+ *
+ * Una escala puede tener peldaños sin usar: existe justamente para que lo
+ * próximo que haga falta caiga en un peldaño en vez de inventar un color.
+ */
+function vx_marca_rampas(): array {
+    return [ 'cyan' => 'Teal de marca', 'purple' => 'Púrpura de apoyo', 'pink' => 'Rosa de realce', 'green' => 'Verde de estado', 'ice' => 'Neutros' ];
+}

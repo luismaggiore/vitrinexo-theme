@@ -36,6 +36,9 @@ jobs:
         continue-on-error: true
         run: |
           rsync -az --checksum --delete \
+            --exclude '.git' --exclude '.github' --exclude 'node_modules' \
+            --exclude 'pruebas' --exclude 'package.json' --exclude 'package-lock.json' \
+            --exclude 'CLAUDE.md' \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 -p $SSH_PORT" \
             ./ "$SSH_USERNAME@$SSH_HOST:$SSH_TARGET/"
         env:
@@ -50,6 +53,9 @@ jobs:
           echo "Intento 1 falló. Esperando 90 segundos..."
           sleep 90
           rsync -az --checksum --delete \
+            --exclude '.git' --exclude '.github' --exclude 'node_modules' \
+            --exclude 'pruebas' --exclude 'package.json' --exclude 'package-lock.json' \
+            --exclude 'CLAUDE.md' \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 -p $SSH_PORT" \
             ./ "$SSH_USERNAME@$SSH_HOST:$SSH_TARGET/"
         env:

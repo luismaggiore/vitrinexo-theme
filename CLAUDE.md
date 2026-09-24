@@ -44,6 +44,36 @@ vitrinexo-theme/
     └── footer.php               ← incluye links a /privacidad/ y /terminos/
 ```
 
+## Manual de marca (/marca)
+
+El manual vive en el código, no en una página de WordPress: se sirve por regla de reescritura desde `inc/marca/ruta.php`, así que nadie puede editarlo desde el escritorio. Lleva `noindex`.
+
+```
+inc/marca/
+├── ruta.php         ← la regla /marca, el noindex y los enqueue
+├── tokens.php       ← lee el :root de style.css (la página es el espécimen)
+├── criterios.php    ← las 3 partes y sus 28 criterios, con su estado
+├── papeles.php      ← la capa semántica con el oficio de cada token
+├── piezas.php       ← las piezas de render (bloque, muestra, celda, tabla)
+├── contenido.php    ← la prosa de cada criterio
+└── decisiones.php   ← qué se eligió, contra qué y con qué medición
+templates/page-marca.php    ← la página
+assets/css/marca.css        ← solo tokens semánticos, nunca primitivos
+pruebas/                    ← la suite (no se sube al servidor)
+```
+
+**La regla del proyecto:** cada regla se escribe, el sistema la obedece, una prueba la mide, y la prueba se verifica rompiendo el código a propósito. Saltarse lo último deja una suite verde que no mide nada.
+
+```bash
+npm run verificar        # lee código y tokens, no abre nada
+npm run accesibilidad    # mide la página publicada con Playwright
+npm run avance           # qué criterio está escrito y cuál no (informa, no falla)
+```
+
+`npm run accesibilidad -- http://127.0.0.1:8899/marca` mide otra URL.
+
+Los tokens nuevos del sistema de diseño (`--fs-*`, `--space-*`, `--color-primary-ink`) se agregaron con el manual y son aditivos: no cambian ninguna pantalla existente.
+
 ## Deploy
 
 Push a `main` → GitHub Actions → rsync SSH → Hostinger.
