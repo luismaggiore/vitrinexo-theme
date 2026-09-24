@@ -116,8 +116,9 @@ El canvas se inyecta automáticamente con `position: fixed; z-index: 0`. El cont
 
 ## Caché
 
-Después de cambios en assets estáticos (imágenes, CSS), purgar el CDN de Hostinger manualmente:
-**hPanel → vitrinexo.com → Rendimiento → CDN → Vaciar caché**
+**Sube la versión del tema en `style.css` cada vez que cambies un asset.** El `?ver=` sale de ahí, y sin cambiarlo el CDN sigue sirviendo el archivo viejo desde algunos nodos: `curl` puede traer el nuevo mientras el navegador recibe el anterior. Pasó con los tokens del manual de marca, y se ve como una variable CSS que existe en el archivo y llega vacía a la página.
+
+Si aun así hay que purgar a mano: **hPanel → vitrinexo.com → Rendimiento → CDN → Vaciar caché**
 
 LiteSpeed se purga automáticamente al hacer deploy.
 
