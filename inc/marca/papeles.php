@@ -105,6 +105,21 @@ function vx_marca_familias(): array {
             ],
         ],
         [
+            'titulo' => 'Tracking',
+            'bajada' => 'Cuánto respira cada letra. Va pegado al tamaño y no suelto: el mismo tracking que asienta un titular de 40 px aprieta una nota de 12.',
+            'papeles' => [
+                '--ls-display'     => 'El titular de portada. Se cierra apenas, porque a ese tamaño el aire sobra.',
+                '--ls-h2'          => 'El título de sección.',
+                '--ls-h3'          => 'La declaración.',
+                '--ls-h4'          => 'El título de bloque.',
+                '--ls-body-l'      => 'La bajada: sin tocar.',
+                '--ls-body'        => 'La prosa: sin tocar. El cuerpo se lee mejor con el tracking que la fuente trae de fábrica.',
+                '--ls-body-s'      => 'La nota. Abre un poco, porque en chico las letras se tocan.',
+                '--ls-caption'     => 'La etiqueta y el dato. Abre un poco más por lo mismo.',
+                '--ls-sobretitulo' => 'La caja alta. Es la única que abre de verdad: en mayúsculas, sin el tracking extra, las letras se pegan.',
+            ],
+        ],
+        [
             'titulo' => 'Espaciado',
             'bajada' => 'La escala de aire, en múltiplos de 4. Existe para que lo próximo que haga falta caiga en un peldaño en vez de inventar 33 px.',
             'papeles' => [

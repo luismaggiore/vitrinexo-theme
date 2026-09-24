@@ -118,6 +118,17 @@
   --fs-body-s: 14px;
   --fs-caption: 12px;
 
+  /* Tracking, un peldaño por tamaño */
+  --ls-display: -0.02em;
+  --ls-h2: -0.015em;
+  --ls-h3: -0.01em;
+  --ls-h4: -0.005em;
+  --ls-body-l: 0em;
+  --ls-body: 0em;
+  --ls-body-s: 0.005em;
+  --ls-caption: 0.01em;
+  --ls-sobretitulo: 0.1em;
+
   /* Espaciado */
   --space-1: 4px;
   --space-2: 8px;

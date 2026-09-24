@@ -128,6 +128,7 @@ function vx_marca_identidad(): void {
 
     vx_marca_bloque( 'identidad-escala-tipografica', function () {
         vx_marca_p( 'Ocho peldaños y nada entre medio. Cada uno se muestra acá con el peldaño que documenta: lo que lees es el token, no una imagen del token.' );
+        vx_marca_p( '<strong>El tracking va pegado al tamaño y no suelto.</strong> Cada peldaño trae el suyo, y por eso son dos valores y no uno: el mismo tracking que asienta un titular de 40 px aprieta una nota de 12. Los títulos cierran apenas, de 2% a 0,5%; la prosa no se toca; lo chico abre un poco.' );
         foreach ( [
             [ '--fs-display', 'Titular de portada', 'Uno por página, y solo en portada.' ],
             [ '--fs-h2', 'Parte', 'El título de una sección mayor, con su número al lado.' ],
@@ -140,6 +141,7 @@ function vx_marca_identidad(): void {
         ] as [ $token, $uso, $como ] ) {
             vx_marca_peldano_texto( $token, $uso, $como );
         }
+        vx_marca_p( 'Lo que un peldaño no arregla solo: el CSS del producto aprieta <strong>todo h1 y h2 a -0,07em</strong> con una regla global, que a 40 px son 2,8 px de menos entre letra y letra. Esta página declara su tracking para no heredarlo, y una prueba compara lo que se ve contra el token.' );
         vx_marca_p( 'La escala se agregó al sistema con este manual. El CSS del producto trae <strong>277 declaraciones de tamaño escritas a mano</strong>, de las cuales <strong>166 caen fuera de estos ocho peldaños</strong>. Solo 13 px aparece 55 veces. Migrarlas es trabajo aparte y está anotado en el registro de decisiones.' );
     } );
 

@@ -220,14 +220,22 @@ function vx_marca_celda( string $tinta, string $fondo, float $minimo = 4.5 ): vo
 function vx_marca_peldano_texto( string $token, string $uso, string $como ): void {
     $mapa  = vx_marca_mapa_tokens();
     $valor = vx_marca_resolver( $mapa[ $token ] ?? '' );
+    // El tracking es parte del peldaño, así que se nombra y se aplica junto al
+    // tamaño: un espécimen que no lleva su propio tracking no es el espécimen.
+    $ls    = str_replace( '--fs-', '--ls-', $token );
+    $tiene = isset( $mapa[ $ls ] );
     ?>
     <div class="vx-nivel">
         <div class="vx-nivel-cabeza">
             <span class="vx-dato"><?php echo esc_html( $token ); ?></span>
             <span class="vx-dato vx-tenue"><?php echo esc_html( $valor ); ?></span>
+            <?php if ( $tiene ) : ?>
+                <span class="vx-dato vx-tenue"><?php echo esc_html( vx_marca_resolver( $mapa[ $ls ] ) ); ?></span>
+            <?php endif; ?>
             <span class="vx-nivel-uso"><?php echo esc_html( $uso ); ?></span>
         </div>
-        <p class="vx-nivel-muestra" style="font-size:var(<?php echo esc_attr( $token ); ?>)">
+        <p class="vx-nivel-muestra" style="font-size:var(<?php echo esc_attr( $token ); ?>)<?php
+            echo $tiene ? ';letter-spacing:var(' . esc_attr( $ls ) . ')' : ''; ?>">
             Conecta, colabora y crece
         </p>
         <p class="vx-nota"><?php echo esc_html( $como ); ?></p>
