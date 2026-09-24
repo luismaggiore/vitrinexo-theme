@@ -74,6 +74,10 @@ npm run avance           # qué criterio está escrito y cuál no (informa, no f
 
 Los tokens nuevos del sistema de diseño (`--fs-*`, `--space-*`, `--color-primary-ink`) se agregaron con el manual y son aditivos: no cambian ninguna pantalla existente.
 
+**El tracking sale siempre de un peldaño `--ls-*`, nunca escrito a mano.** Se elige por el tamaño al que se aplica: `--ls-hero` para el titular que crece con el ancho, luego `--ls-display`, `--ls-h2`, `--ls-h3`, `--ls-h4`, y `--ls-sobretitulo` / `--ls-sobretitulo-xs` para caja alta según sea de 12 px o más, o de 11 o menos. Ya no hay regla general sobre `h1, h2`: si un titular nuevo no declara el suyo, se queda en cero y la prueba de tipografía lo caza.
+
+En el panel de WordPress el tracking sigue escrito a mano a propósito: wp-admin no carga `style.css`, así que ahí un `var(--ls-*)` no resolvería a nada.
+
 ## Deploy
 
 Push a `main` → GitHub Actions → rsync SSH → Hostinger.
