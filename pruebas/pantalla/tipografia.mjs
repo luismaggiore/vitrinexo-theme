@@ -15,6 +15,14 @@
 import { informar, resolver, tokensDelSistema } from '../comun.mjs';
 import { enLaPagina } from '../comun-pantalla.mjs';
 
+/**
+ * En pantalla angosta los dos titulares bajan un peldaño. No es otra escala:
+ * es otro escalón de la misma, y por eso se mide igual en vez de dejar sin
+ * medir los anchos chicos.
+ */
+const ANGOSTO = 900;
+const BAJA_UN_PELDANO = { '--fs-display': '--fs-h2', '--fs-h2': '--fs-h3' };
+
 /** Qué peldaño le toca a cada pieza del manual. */
 const PIEZAS = [
   [ '.vx-display', '--fs-display', '--ls-display' ],
@@ -31,9 +39,14 @@ const mapa = Object.fromEntries( tokensDelSistema().flatMap( ( g ) => g.tokens.m
 const px = ( token ) => parseFloat( resolver( mapa[ token ] ?? '', mapa ) );
 const em = ( token ) => parseFloat( resolver( mapa[ token ] ?? '', mapa ) );
 
-const esperado = PIEZAS.map( ( [ sel, fs, ls ] ) => ( { sel, tam: px( fs ), tracking: em( ls ) * px( fs ) } ) );
+/** Lo que le toca a cada pieza en un ancho dado. */
+const esperadoEn = ( ancho ) =>
+  PIEZAS.map( ( [ sel, fs, ls ] ) => {
+    const token = ancho <= ANGOSTO && BAJA_UN_PELDANO[ fs ] ? BAJA_UN_PELDANO[ fs ] : fs;
+    return { sel, tam: px( token ), tracking: em( ls ) * px( token ) };
+  } );
 
-const fallos = await enLaPagina( async ( pagina ) =>
+const fallos = await enLaPagina( async ( pagina, ancho ) =>
   pagina.evaluate( ( piezas ) => {
     const malos = [];
     for ( const { sel, tam, tracking } of piezas ) {
@@ -53,7 +66,8 @@ const fallos = await enLaPagina( async ( pagina ) =>
       }
     }
     return malos;
-  }, esperado )
+  }, esperadoEn( ancho ) ),
+  { anchos: [ 390, 1200 ] }
 );
 
 informar( 'tipografia', fallos );

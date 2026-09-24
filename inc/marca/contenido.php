@@ -128,6 +128,7 @@ function vx_marca_identidad(): void {
 
     vx_marca_bloque( 'identidad-escala-tipografica', function () {
         vx_marca_p( 'Ocho peldaños y nada entre medio. Cada uno se muestra acá con el peldaño que documenta: lo que lees es el token, no una imagen del token.' );
+        vx_marca_p( 'En pantalla angosta los dos titulares bajan un peldaño: el de portada usa el de sección y el de sección usa el de declaración. No es otra escala, es otro escalón de la misma.' );
         vx_marca_p( '<strong>El tracking va pegado al tamaño y no suelto.</strong> Cada peldaño trae el suyo, y por eso son dos valores y no uno: el mismo tracking que asienta un titular de 40 px aprieta una nota de 12. Los títulos cierran apenas, de 2% a 0,5%; la prosa no se toca; lo chico abre un poco.' );
         foreach ( [
             [ '--fs-display', 'Titular de portada', 'Uno por página, y solo en portada.' ],
