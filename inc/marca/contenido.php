@@ -248,21 +248,35 @@ function vx_marca_voz(): void {
             [ 'directorio', 'listado, catálogo, base de datos' ],
             [ 'membresía', 'suscripción, plan de pago' ],
         ] );
-        vx_marca_p( 'Fuera de la lista hay una regla de puntuación: <strong>no se usan guiones largos</strong> en ningún texto de la marca. Donde aparezca uno va una coma, un punto o dos puntos.' );
-        vx_marca_pendiente( 'Faltan las palabras prohibidas sin reemplazo, esas que no se dicen de ninguna forma. Se completan cuando esté escrito el tono.' );
+        vx_marca_p( 'Hay además cuatro palabras que no se dicen de ninguna forma, porque no significan nada y se nota: <strong>ecosistema</strong>, <strong>sinergia</strong>, <strong>solución</strong> y <strong>partner</strong>. No tienen reemplazo: si una frase las necesita, la frase no estaba diciendo nada.' );
+        vx_marca_p( 'Y una regla de puntuación: <strong>no se usan guiones largos</strong> en ningún texto de la marca. Donde aparezca uno va una coma, un punto o dos puntos.' );
+        vx_marca_p( 'El verbo propio, <strong>vitrinear</strong>, se conjuga normal y no se pone entre comillas. Está en el diccionario de la marca, no es una gracia.' );
     } );
 
     vx_marca_bloque( 'voz-patrones-de-copy', function () {
-        vx_marca_pendiente( 'Las formas fijas: cómo se escribe un botón, un título, un error y un aviso. Hoy conviven «Inscríbete», «Ingresar» y «Escribir por WhatsApp» en la misma pantalla, que son tres formas distintas de pedir lo mismo.' );
+        vx_marca_valor( 'El botón dice el verbo y su objeto', 'Dentro de la plataforma va en infinitivo y en tipo oración: «Guardar ajustes», «Enviar solicitud», «Buscar». Nunca un verbo suelto que obligue a adivinar qué se guarda. En captación, y solo ahí, va en segunda persona: «Inscríbete», «Empieza a vitrinear». Sin flechas y sin puntos suspensivos: hoy el botón de captación arrastra una flecha en el texto, y una flecha escrita no es un ícono.' );
+        vx_marca_valor( 'El título de pantalla es un sustantivo', 'Directorio, Conexiones, Mis publicaciones. No es una frase ni un saludo: el saludo va debajo si hace falta.' );
+        vx_marca_valor( 'El error dice qué pasó y qué hacer', 'En ese orden, en segunda persona y sin culpar a nadie. «Incluye el prefijo de país con + en tu celular (ej: +56 9 1234 5678)» es el patrón: nombra el problema y muestra la forma correcta. Un error que solo dice «campo inválido» obliga a adivinar.' );
+        vx_marca_valor( 'El campo obligatorio se reclama de una sola forma', '«El nombre de tu empresa es obligatorio.» Se nombra el campo, no se dice «campos requeridos» ni «no puede estar vacío» ni «requerido» a secas. Hoy conviven las cuatro formas y solo esa queda.' );
+        vx_marca_valor( 'El aviso dice el estado y qué sigue', '«Tu perfil está en revisión. Te escribimos cuando esté aprobado.» Sin el qué sigue, el aviso deja a alguien esperando sin saber cuánto.' );
+        vx_marca_valor( 'La pantalla vacía dice por qué está vacía', 'Y ofrece la acción que la llena. Una pantalla vacía sin explicación se lee como una falla del producto.' );
     } );
 
     vx_marca_bloque( 'voz-numeros-y-formatos', function () {
-        vx_marca_p( 'El teléfono se guarda y se muestra <strong>con prefijo internacional</strong>, con el signo más adelante, porque es lo que necesita el botón de WhatsApp para funcionar desde cualquier país.' );
-        vx_marca_pendiente( 'Moneda, fecha, hora y porcentaje. Con alcance global hay que decidir si la fecha se escribe en formato chileno o en uno que se lea igual en todas partes.' );
+        vx_marca_p( 'La marca opera en varios países a la vez, y casi todas estas reglas existen por eso: un formato que se lee distinto en Santiago y en Bogotá no es un detalle de estilo, es un dato mal entendido.' );
+        vx_marca_valor( 'Teléfono', 'Siempre con prefijo internacional y con el signo más adelante: +56 9 1234 5678. Lo pide el sistema al registrar, y es lo que necesita el botón de WhatsApp para funcionar desde cualquier país.' );
+        vx_marca_valor( 'Moneda', 'El monto va precedido del código de tres letras: USD 49. Nunca el signo peso solo, porque en Hispanoamérica ese signo nombra siete monedas distintas. La moneda del sistema es un ajuste y hoy está en USD.' );
+        vx_marca_valor( 'Fecha', 'Corta, 24/09/2026. Larga, miércoles 24 de septiembre de 2026, en minúscula el día y el mes. Con hora, 24/09/2026 20:00.' );
+        vx_marca_valor( 'Hora', 'En formato de 24 horas y con dos puntos: 20:00. Cuando algo pasa a la vez en varias ciudades, la hora va siempre seguida de «hora local», porque sin eso la mitad de los invitados calcula mal.' );
+        vx_marca_valor( 'Miles y decimales', 'Punto para los miles y coma para los decimales: 1.234,56. Es la convención del español, y mezclarla con la inglesa en la misma pantalla es la forma más rápida de que alguien lea mil veces de más.' );
+        vx_marca_valor( 'Porcentaje', 'Pegado al número: 35%.' );
+        vx_marca_pendiente( 'El sitio anuncia las cenas como «miércoles 8pm» y el código guarda 20:00. Hay que elegir uno. Y cuando entre Estados Unidos, la fecha corta d/m/Y se va a leer al revés: esa revisión queda anotada para entonces.' );
     } );
 
     vx_marca_bloque( 'voz-emojis', function () {
-        vx_marca_p( 'Hoy el producto usa emojis en al menos un lugar: el aviso de perfil en validación empieza con un reloj de arena.' );
-        vx_marca_pendiente( 'Sí o no, y dónde. Una respuesta clara vale más que una política larga. Si la respuesta es que no, hay que sacar el reloj de arena de ese aviso.' );
+        vx_marca_p( 'Hoy el producto usa dos: un reloj de arena en el aviso de perfil en validación, y un visto que aparece nueve veces en listas donde debería ir un ícono de la familia tipográfica.' );
+        vx_marca_p( 'La recomendación es <strong>ninguno, en ninguna parte</strong>: ni en la interfaz, ni en los correos, ni en las notificaciones. Un emoji en un aviso de espera lo hace sonar liviano justo cuando alguien está esperando una aprobación, y el visto de lista ya existe como ícono, que se pinta con la tinta que lo rodea y se ve igual en todos los sistemas.' );
+        vx_marca_pendiente( 'La respuesta la da quien responde por la marca, y una respuesta clara vale más que una política larga. Si es que no, hay que sacar el reloj de arena del aviso y cambiar los nueve vistos por el ícono.' );
     } );
+
 }
