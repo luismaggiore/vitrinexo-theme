@@ -192,7 +192,11 @@ function vx_marca_celda( string $tinta, string $fondo, float $minimo = 4.5 ): vo
         <span class="vx-celda-muestra" data-demostracion="1"
               style="background:<?php echo esc_attr( $f ); ?>;color:<?php echo esc_attr( $t ); ?>" aria-hidden="true">Aa</span>
         <span class="vx-dato <?php echo $pasa ? 'vx-pasa' : 'vx-falla'; ?>">
-            <?php echo esc_html( number_format( $r, 2, ',', '' ) ); ?><?php echo $pasa ? '' : ' ✕'; ?>
+            <?php echo esc_html( number_format( $r, 2, ',', '' ) ); ?>
+            <?php if ( ! $pasa ) : ?>
+                <i class="ti ti-x" aria-hidden="true"></i>
+                <span class="vx-solo-lectores">no pasa</span>
+            <?php endif; ?>
         </span>
     </div>
     <?php

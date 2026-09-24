@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-vx__brand" aria-label="Ir al inicio">
         <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo">
       </a>
-      <a href="#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm">Inscríbete →</a>
+      <a href="#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm">Inscríbete</a>
     </div>
     <div class="footer-vx__grid">
       <div>

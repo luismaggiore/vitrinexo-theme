@@ -254,7 +254,7 @@ function vx_marca_voz(): void {
     } );
 
     vx_marca_bloque( 'voz-patrones-de-copy', function () {
-        vx_marca_valor( 'El botón dice el verbo y su objeto', 'Dentro de la plataforma va en infinitivo y en tipo oración: «Guardar ajustes», «Enviar solicitud», «Buscar». Nunca un verbo suelto que obligue a adivinar qué se guarda. En captación, y solo ahí, va en segunda persona: «Inscríbete», «Empieza a vitrinear». Sin flechas y sin puntos suspensivos: hoy el botón de captación arrastra una flecha en el texto, y una flecha escrita no es un ícono.' );
+        vx_marca_valor( 'El botón dice el verbo y su objeto', 'Dentro de la plataforma va en infinitivo y en tipo oración: «Guardar ajustes», «Enviar solicitud», «Buscar». Nunca un verbo suelto que obligue a adivinar qué se guarda. En captación, y solo ahí, va en segunda persona: «Inscríbete», «Empieza a vitrinear». Sin flechas y sin puntos suspensivos. Una flecha escrita dentro del rótulo no es un ícono: no se alinea, no toma la tinta del texto y se ve distinta en cada sistema.' );
         vx_marca_valor( 'El título de pantalla es un sustantivo', 'Directorio, Conexiones, Mis publicaciones. No es una frase ni un saludo: el saludo va debajo si hace falta.' );
         vx_marca_valor( 'El error dice qué pasó y qué hacer', 'En ese orden, en segunda persona y sin culpar a nadie. «Incluye el prefijo de país con + en tu celular (ej: +56 9 1234 5678)» es el patrón: nombra el problema y muestra la forma correcta. Un error que solo dice «campo inválido» obliga a adivinar.' );
         vx_marca_valor( 'El campo obligatorio se reclama de una sola forma', '«El nombre de tu empresa es obligatorio.» Se nombra el campo, no se dice «campos requeridos» ni «no puede estar vacío» ni «requerido» a secas. Hoy conviven las cuatro formas y solo esa queda.' );
@@ -274,9 +274,10 @@ function vx_marca_voz(): void {
     } );
 
     vx_marca_bloque( 'voz-emojis', function () {
-        vx_marca_p( 'Hoy el producto usa dos: un reloj de arena en el aviso de perfil en validación, y un visto que aparece nueve veces en listas donde debería ir un ícono de la familia tipográfica.' );
-        vx_marca_p( 'La recomendación es <strong>ninguno, en ninguna parte</strong>: ni en la interfaz, ni en los correos, ni en las notificaciones. Un emoji en un aviso de espera lo hace sonar liviano justo cuando alguien está esperando una aprobación, y el visto de lista ya existe como ícono, que se pinta con la tinta que lo rodea y se ve igual en todos los sistemas.' );
-        vx_marca_pendiente( 'La respuesta la da quien responde por la marca, y una respuesta clara vale más que una política larga. Si es que no, hay que sacar el reloj de arena del aviso y cambiar los nueve vistos por el ícono.' );
+        vx_marca_declaracion( 'Ninguno, en ninguna parte.' );
+        vx_marca_p( 'Ni en la interfaz, ni en los correos, ni en las notificaciones, ni en el panel de administración. No hay excepción por tono ni por canal.' );
+        vx_marca_p( 'La regla cubre también los pictogramas que no son emojis de manual y hacen el mismo trabajo: el visto, el aspa, la flecha escrita dentro de un rótulo. Se ven distinto en cada sistema operativo, no toman la tinta que los rodea y no se pueden alinear. <strong>Donde hacía falta un símbolo va un ícono de Tabler</strong>, que sí hace las tres cosas.' );
+        vx_marca_p( 'En un correo, donde el ícono tipográfico no se puede cargar, el símbolo se reemplaza por la palabra: «Fecha:» y «Lugar:» en vez de un calendario y un pin.' );
     } );
 
 }

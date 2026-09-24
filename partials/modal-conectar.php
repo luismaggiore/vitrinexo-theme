@@ -95,7 +95,7 @@ $viewer_empresas = (array)  ( $args['viewer_empresas'] ?? [] );
         </form>
 
         <div id="modal-success" style="display:none;text-align:center;padding:1.5rem 0">
-          <div style="font-size:2.5rem;margin-bottom:.75rem">✓</div>
+          <div style="font-size:2.5rem;margin-bottom:.75rem;color:var(--color-success)"><i class="ti ti-circle-check-filled" aria-hidden="true"></i></div>
           <div style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin-bottom:.4rem">Solicitud enviada</div>
           <p class="text-body-muted mb-0">
             <span id="modal-receptor-nombre-success"><?php echo esc_html( $receptor_nombre ); ?></span>

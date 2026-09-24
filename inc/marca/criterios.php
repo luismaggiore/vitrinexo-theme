@@ -86,7 +86,7 @@ function vx_marca_partes(): array {
                 [ 'Vocabulario', 'definido', 'Ocho pares de decimos y no decimos, cuatro palabras sin reemplazo y la prohibición del guion largo.' ],
                 [ 'Patrones de copy', 'definido', 'Botón, título, error, campo obligatorio, aviso y pantalla vacía. Una sola forma para cada uno.' ],
                 [ 'Números y formatos', 'parcial', 'Teléfono, moneda, fecha, hora, decimales y porcentaje. Falta zanjar 8pm contra 20:00.' ],
-                [ 'Emojis', 'pendiente', 'El producto ya usa uno sin haberlo decidido.' ],
+                [ 'Emojis', 'definido', 'Ninguno, en ninguna parte. Incluye el visto, el aspa y la flecha escrita en un rótulo.' ],
             ],
         ],
     ];
