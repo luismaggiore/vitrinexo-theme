@@ -173,7 +173,7 @@
 .vx-barra-titulo {
   font-size: var(--fs-body-s);
   font-weight: 600;
-  letter-spacing: .08em;
+  letter-spacing: var(--ls-sobretitulo);
   text-transform: uppercase;
   color: var(--color-text-secondary);
 }

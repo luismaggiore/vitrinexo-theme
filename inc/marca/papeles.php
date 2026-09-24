@@ -108,7 +108,8 @@ function vx_marca_familias(): array {
             'titulo' => 'Tracking',
             'bajada' => 'Cuánto respira cada letra. Va pegado al tamaño y no suelto: el mismo tracking que asienta un titular de 40 px aprieta una nota de 12.',
             'papeles' => [
-                '--ls-display'     => 'El titular de portada. Se cierra apenas, porque a ese tamaño el aire sobra.',
+                '--ls-hero'        => 'El titular de la portada del sitio, el único que crece con el ancho. Cierra un poco más porque llega a 64 px y ahí el aire sobra de verdad.',
+                '--ls-display'     => 'El titular de una página. Se cierra apenas.',
                 '--ls-h2'          => 'El título de sección.',
                 '--ls-h3'          => 'La declaración.',
                 '--ls-h4'          => 'El título de bloque.',
@@ -116,7 +117,8 @@ function vx_marca_familias(): array {
                 '--ls-body'        => 'La prosa: sin tocar. El cuerpo se lee mejor con el tracking que la fuente trae de fábrica.',
                 '--ls-body-s'      => 'La nota. Abre un poco, porque en chico las letras se tocan.',
                 '--ls-caption'     => 'La etiqueta y el dato. Abre un poco más por lo mismo.',
-                '--ls-sobretitulo' => 'La caja alta. Es la única que abre de verdad: en mayúsculas, sin el tracking extra, las letras se pegan.',
+                '--ls-sobretitulo' => 'La caja alta de 12 px o más. Es la que abre de verdad: en mayúsculas, sin el tracking extra, las letras se pegan.',
+                '--ls-sobretitulo-xs' => 'La caja alta de 11 px o menos. Abre todavía más, porque cuanto más chica la mayúscula, más aire necesita.',
             ],
         ],
         [

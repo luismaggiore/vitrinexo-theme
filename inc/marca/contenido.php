@@ -142,7 +142,8 @@ function vx_marca_identidad(): void {
         ] as [ $token, $uso, $como ] ) {
             vx_marca_peldano_texto( $token, $uso, $como );
         }
-        vx_marca_p( 'Lo que un peldaño no arregla solo: el CSS del producto aprieta <strong>todo h1 y h2 a -0,07em</strong> con una regla global, que a 40 px son 2,8 px de menos entre letra y letra. Esta página declara su tracking para no heredarlo, y una prueba compara lo que se ve contra el token.' );
+        vx_marca_p( 'Hay dos peldaños más que viven fuera de la escala fija de ocho, y son de tracking: <code>--ls-hero</code>, para el titular de la portada del sitio, que es el único que crece con el ancho hasta 64 px, y <code>--ls-sobretitulo-xs</code>, para la caja alta de 11 px o menos, porque cuanto más chica la mayúscula más aire necesita.' );
+        vx_marca_p( '<strong>El tracking del sitio entero sale de acá.</strong> Había una regla general que apretaba todo h1 y h2 un 7% sin mirar el tamaño, que a 64 px son 4,5 px de menos entre letra y letra. Se borró, y las 66 reglas que declaraban tracking a mano ahora nombran su peldaño. Una prueba comprueba que no quede ninguna suelta.' );
         vx_marca_p( 'La escala se agregó al sistema con este manual. El CSS del producto trae <strong>277 declaraciones de tamaño escritas a mano</strong>, de las cuales <strong>166 caen fuera de estos ocho peldaños</strong>. Solo 13 px aparece 55 veces. Migrarlas es trabajo aparte y está anotado en el registro de decisiones.' );
     } );
 
